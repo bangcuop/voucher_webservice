@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://123.30.179.27:8081/webservice/VDCTelcoAPI?wsdl" uri="xml-resources/web-service-references/VDCTelcoAPI/wsdl/123.30.179.27_8081/webservice/VDCTelcoAPI.wsdl"/>
+    <system systemId="file:/home/liemnh/Desktop/VDCTelcoAPI" uri="xml-resources/web-service-references/VDCTelcoAPI/wsdl/VDCTelcoAPI.wsdl"/>
+</catalog>

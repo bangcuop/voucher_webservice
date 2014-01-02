@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Account">
+    <typeAlias alias="gameServiceDto" type="com.vss.cardservice.dto.GameService"/>
+    <select id="getAccountById" resultClass="String" parameterClass="Map">
+      select account
+      from game_account
+      where id = $accountId$
+    </select>
+
+    <select id="getAccountList" resultClass="String">
+      select distinct account
+      from game_account
+    </select>
+    
+    <select id="getGameServiceList" resultClass="gameServiceDto">
+      SELECT * FROM game_service ORDER BY partnerId ASC
+    </select>
+
+</sqlMap>

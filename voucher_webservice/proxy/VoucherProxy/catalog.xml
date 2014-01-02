@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://10.26.5.110:8480/voucher/VoucherService?wsdl" uri="xml-resources/web-service-references/VoucherService/wsdl/10.26.5.110_8480/voucher/VoucherService.wsdl"/>
+    <system systemId="http://10.26.5.110:8480/voucher/VoucherService?xsd=1" uri="xml-resources/web-service-references/VoucherService/wsdl/10.26.5.110_8480/voucher/VoucherService.xsd_1.xsd"/>
+    <system systemId="http://123.30.51.249/voucher/VoucherService?wsdl" uri="xml-resources/web-service-references/VoucherService/wsdl/123.30.51.249/voucher/VoucherService.wsdl"/>
+    <system systemId="http://123.30.51.249:80/voucher/VoucherService?xsd=1" uri="xml-resources/web-service-references/VoucherService/wsdl/123.30.51.249_80/voucher/VoucherService.xsd_1.xsd"/>
+</catalog>

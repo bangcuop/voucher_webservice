@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="partner">
+    <typeAlias alias="partnerDto" type="com.vss.cardservice.dto.Partner"/>
+
+    <select id="getListPartner" resultClass="partnerDto" parameterClass="Map">
+        select t.partnerId,
+          t.partnerCode,
+          t.createDate,
+          t.secretKey,
+          t.password,
+          t.isLock,
+          t.notes,
+          t.validIps,
+          t.mailAddress,
+          t.partnerName,
+          t.phone,
+          t.businessContactName KD_HoTen,
+          t.businessContactEmail KD_Email,
+          t.businessContactPhone KD_DT,
+          t.techniqueContactName KT_HoTen,
+          t.techniqueContactEmail KT_Email,
+          t.techniqueContactPhone KT_DT,
+          t.compareContactName DS_HoTen,
+          t.compareContactEmail DS_Email,
+          t.compareContactPhone DS_DT
+          from partner t where t.IsLock = 0
+        <dynamic>
+            <isNotNull property="partnercode">
+                AND partnerCode = #partnercode#
+            </isNotNull>
+        </dynamic>
+    </select>
+
+    <update id="updatePartner" parameterClass="Map">
+        update partner
+        set validIps = #validips#
+        where partnerCode = #partnercode#
+    </update>
+
+<!--    <select id="checkLogin" resultClass="partnerDto">
+        select t.* from Partner t where RTRIM(LTRIM(t.PartnerCode)) like #username# and RTRIM(LTRIM(t.Password)) like #passworldEncrypt#
+    </select>-->
+</sqlMap>

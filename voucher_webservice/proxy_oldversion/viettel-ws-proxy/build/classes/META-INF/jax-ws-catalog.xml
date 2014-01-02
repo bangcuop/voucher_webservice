@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="https://115.84.178.2:8443/ScratchCardAPI/ScratchCardAPI?wsdl" uri="wsdl/115.84.178.2_8443/ScratchCardAPI/ScratchCardAPI.wsdl"/>
+    <system systemId="https://115.84.178.2:8443/ScratchCardAPI/ScratchCardAPI?xsd=1" uri="wsdl/115.84.178.2_8443/ScratchCardAPI/ScratchCardAPI.xsd_1.xsd"/>
+</catalog>
+

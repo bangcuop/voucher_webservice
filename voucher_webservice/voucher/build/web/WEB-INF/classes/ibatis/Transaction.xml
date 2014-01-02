@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--
+    Document   : issuer.xml
+    Created on : July 25, 2011, 3:38 PM
+    Author     : zannami
+    Description:
+        Purpose of the document follows.
+--> 
+<sqlMap namespace="transaction">
+    <typeAlias alias="transactionDto" type="com.vss.cardservice.dto.Transaction"/>
+    <insert id="createTransaction" parameterClass="transactionDto">
+        INSERT INTO transaction(partnerId, cardCode,transRefId, requestTime,cardId,requestFromIp,status, serverIp)
+        VALUES(#partnerId#, #cardCode#, #transRefId#, #requestTime#,$cardId$,#requestIp#,0, #serverIp#)
+        <selectKey resultClass="Long">
+            select LAST_INSERT_ID() as id
+        </selectKey>
+    </insert>
+    <update id="updateTransaction" parameterClass="String">
+        $sql$
+    </update>
+
+    <select id="checkTransaction" parameterClass="transactionDto" resultClass="Integer">
+        SELECT count(*) from transaction t
+        WHERE t.partnerId = $partnerId$
+        AND t.transrefid = #transRefId#
+    </select>
+
+    <select id="getTransactionDetail" parameterClass="Map" resultClass="transactionDto">
+        SELECT t.responseToPartner
+        From transaction t
+        WHERE t.partnerId = #partnerId#
+        AND t.transRefId = #transRefId# 
+        ORDER BY transactionId DESC LIMIT 1
+    </select>
+    
+    <select id="getLastTransactionId" resultClass="Integer">
+        SELECT MAX(a) FROM (
+            SELECT if(transactionId is null,0,transactionId) a FROM transaction
+        ) b
+    </select>
+    <select id="getStatusByCardCode" parameterClass="Map" resultClass="transactionDto">
+        SELECT t.partnerId, t.cardCode, t.cardSerial, t.transRefId, c.issuerId 
+        FROM transaction t 
+        INNER JOIN card c on c.cardId = t.cardId
+        WHERE 
+        (t.partnerId = $partnerId$ AND t.transRefId = #transRefId#)
+        OR (t.cardCode = #cardCode# AND t.cardSerial = BINARY #cardSerial# AND c.issuerId = $issuerId$ AND t.status = '3') 
+        LIMIT 1
+    </select>
+<!--
+    <select id="getListTransactionByDay" parameterClass="Map" resultClass="transactionDto">
+        select t.transactionId, t.telcoTransRefId, t.cardCode
+        from transaction t
+        inner join card c
+        on c.cardId = t.cardId
+        and c.issuerId = $issuerId$
+        <dynamic>
+            <isEqual property="transType" compareValue="0">
+                AND c.par = 0
+            </isEqual>
+            <isEqual property="transType" compareValue="1">
+                AND c.par > 0
+            </isEqual>
+        </dynamic>
+        and not exists (
+            select t1.transactionId from transaction t1
+            where t1.cardCode = t.cardCode
+            and t1.responseStatus = '01'
+        )
+        and date(t.requestTime) = date(current_timestamp()) - 1
+        limit $start$, $end$
+    </select>
+
+    <select id="countTransactionByDay" parameterClass="Map" resultClass="transactionDto">
+        select count(*)
+        from transaction t
+        inner join card c
+        on c.cardId = t.cardId
+        and c.issuerId = $issuerId$
+        <dynamic>
+            <isEqual property="transType" compareValue="0">
+                AND c.par = 0
+            </isEqual>
+            <isEqual property="transType" compareValue="1">
+                AND c.par > 0
+            </isEqual>
+        </dynamic>
+        and not exists (
+            select t1.transactionId from transaction t1
+            where t1.cardCode = t.cardCode
+            and t1.responseStatus = '01'
+        )
+        and date(t.requestTime) = date(current_timestamp()) - 1
+    </select>-->
+
+<!--    <select id="loadTransaction" parameterClass="Integer" resultClass="transactionDto">
+        select * from transaction where transactionId =#transactionId#
+    </select>-->
+
+<!--    <update id="updateTransactionByProvider" parameterClass="transactionDto">
+        update transaction  set
+        status=#status#,
+        cardId=#cardId#
+        where transactionId=#transactionId# and providerId=#providerId#
+    </update>
+
+    <select id="getCardIdFromIssuerNameAndAmunt" parameterClass="Map" resultClass="Integer">
+        SELECT c.cardId FROM card c inner join issuer i on c.issuerId = i.issuerId where i.name like #issuerName# and c.par = #amount#
+    </select>-->
+    
+
+<!--    <select id="selectAllTransactionFailed" resultClass="transactionDto" parameterClass="Map">
+        select c.issuerId issuer, substr(responseToPartner,24) amount
+        from transaction t
+        inner join card c
+        on c.cardId = t.cardId
+        and  t.responseStatus = '01'
+        and c.par = 0
+        and date(requestTime) = date(CURRENT_TIMESTAMP)
+        and substr(responseToPartner,24) REGEXP <![CDATA[ '^-?[0-9]+$' ]]>
+        order by requestTime desc
+        limit $start$,$end$
+    </select>
+
+    <select id="countAllTransactionFailed" resultClass="Integer">
+        select count(*) from transaction t
+        inner join card c
+        on c.cardId = t.cardId
+        and  t.responseStatus = '01'
+        and c.par = 0
+        and date(requestTime) = date(CURRENT_TIMESTAMP)
+        and substr(responseToPartner,24) REGEXP  <![CDATA[ '^-?[0-9]+$' ]]>
+    </select>-->
+    
+<!--    <update parameterClass="transactionDto" id="updateCardId">
+        update transaction 
+        set cardId = $cardId$
+        where transactionId = $transactionId$
+    </update>-->
+</sqlMap>

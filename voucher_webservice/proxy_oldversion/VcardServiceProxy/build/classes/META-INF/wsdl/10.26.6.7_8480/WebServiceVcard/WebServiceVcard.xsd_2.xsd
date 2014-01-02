@@ -1,0 +1,1700 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2-hudson-752-. --><xs:schema xmlns:tns="http://com/vss/vcard/dto" xmlns:ns1="http://jaxb.dev.java.net/array" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://com/vss/vcard/dto">
+
+<xs:import namespace="http://jaxb.dev.java.net/array" schemaLocation="http://10.26.6.7:8480/WebServiceVcard/WebServiceVcard?xsd=1"></xs:import>
+
+<xs:element name="calculateContract" type="tns:calculateContract"></xs:element>
+
+<xs:element name="calculateContractResponse" type="tns:calculateContractResponse"></xs:element>
+
+<xs:element name="calculateFee" type="tns:calculateFee"></xs:element>
+
+<xs:element name="calculateFeeResponse" type="tns:calculateFeeResponse"></xs:element>
+
+<xs:element name="changeLockStatus" type="tns:changeLockStatus"></xs:element>
+
+<xs:element name="changeLockStatusResponse" type="tns:changeLockStatusResponse"></xs:element>
+
+<xs:element name="changePassword" type="tns:changePassword"></xs:element>
+
+<xs:element name="changePasswordResponse" type="tns:changePasswordResponse"></xs:element>
+
+<xs:element name="checkTransactionBySerial" type="tns:checkTransactionBySerial"></xs:element>
+
+<xs:element name="checkTransactionBySerialMySql" type="tns:checkTransactionBySerialMySql"></xs:element>
+
+<xs:element name="checkTransactionBySerialMySqlResponse" type="tns:checkTransactionBySerialMySqlResponse"></xs:element>
+
+<xs:element name="checkTransactionBySerialResponse" type="tns:checkTransactionBySerialResponse"></xs:element>
+
+<xs:element name="countCardVolumeByAllPartnerEachDay" type="tns:countCardVolumeByAllPartnerEachDay"></xs:element>
+
+<xs:element name="countCardVolumeByAllPartnerEachDayResponse" type="tns:countCardVolumeByAllPartnerEachDayResponse"></xs:element>
+
+<xs:element name="countCardVolumeList" type="tns:countCardVolumeList"></xs:element>
+
+<xs:element name="countCardVolumeListByPartnerEachDay" type="tns:countCardVolumeListByPartnerEachDay"></xs:element>
+
+<xs:element name="countCardVolumeListByPartnerEachDayResponse" type="tns:countCardVolumeListByPartnerEachDayResponse"></xs:element>
+
+<xs:element name="countCardVolumeListResponse" type="tns:countCardVolumeListResponse"></xs:element>
+
+<xs:element name="countPaymentList" type="tns:countPaymentList"></xs:element>
+
+<xs:element name="countPaymentListResponse" type="tns:countPaymentListResponse"></xs:element>
+
+<xs:element name="countTransactionListByPartner" type="tns:countTransactionListByPartner"></xs:element>
+
+<xs:element name="countTransactionListByPartnerResponse" type="tns:countTransactionListByPartnerResponse"></xs:element>
+
+<xs:element name="createPayment" type="tns:createPayment"></xs:element>
+
+<xs:element name="createPaymentResponse" type="tns:createPaymentResponse"></xs:element>
+
+<xs:element name="deleteCard" type="tns:deleteCard"></xs:element>
+
+<xs:element name="deleteCardResponse" type="tns:deleteCardResponse"></xs:element>
+
+<xs:element name="deleteContract" type="tns:deleteContract"></xs:element>
+
+<xs:element name="deleteContractResponse" type="tns:deleteContractResponse"></xs:element>
+
+<xs:element name="deleteFee" type="tns:deleteFee"></xs:element>
+
+<xs:element name="deleteFeeResponse" type="tns:deleteFeeResponse"></xs:element>
+
+<xs:element name="deleteIssuer" type="tns:deleteIssuer"></xs:element>
+
+<xs:element name="deleteIssuerResponse" type="tns:deleteIssuerResponse"></xs:element>
+
+<xs:element name="deletePartnerByIdMySql" type="tns:deletePartnerByIdMySql"></xs:element>
+
+<xs:element name="deletePartnerByIdMySqlResponse" type="tns:deletePartnerByIdMySqlResponse"></xs:element>
+
+<xs:element name="getAllIssuer" type="tns:getAllIssuer"></xs:element>
+
+<xs:element name="getAllIssuerResponse" type="tns:getAllIssuerResponse"></xs:element>
+
+<xs:element name="getAllListPartnerMySql" type="tns:getAllListPartnerMySql"></xs:element>
+
+<xs:element name="getAllListPartnerMySqlResponse" type="tns:getAllListPartnerMySqlResponse"></xs:element>
+
+<xs:element name="getCardVolumeByAllPartnerEachDay" type="tns:getCardVolumeByAllPartnerEachDay"></xs:element>
+
+<xs:element name="getCardVolumeByAllPartnerEachDayResponse" type="tns:getCardVolumeByAllPartnerEachDayResponse"></xs:element>
+
+<xs:element name="getCardVolumeList" type="tns:getCardVolumeList"></xs:element>
+
+<xs:element name="getCardVolumeListByPartner" type="tns:getCardVolumeListByPartner"></xs:element>
+
+<xs:element name="getCardVolumeListByPartnerEachDay" type="tns:getCardVolumeListByPartnerEachDay"></xs:element>
+
+<xs:element name="getCardVolumeListByPartnerEachDayResponse" type="tns:getCardVolumeListByPartnerEachDayResponse"></xs:element>
+
+<xs:element name="getCardVolumeListByPartnerResponse" type="tns:getCardVolumeListByPartnerResponse"></xs:element>
+
+<xs:element name="getCardVolumeListResponse" type="tns:getCardVolumeListResponse"></xs:element>
+
+<xs:element name="getCompareIssuerList" type="tns:getCompareIssuerList"></xs:element>
+
+<xs:element name="getCompareIssuerListResponse" type="tns:getCompareIssuerListResponse"></xs:element>
+
+<xs:element name="getComparePartnerList" type="tns:getComparePartnerList"></xs:element>
+
+<xs:element name="getComparePartnerListResponse" type="tns:getComparePartnerListResponse"></xs:element>
+
+<xs:element name="getContractById" type="tns:getContractById"></xs:element>
+
+<xs:element name="getContractByIdResponse" type="tns:getContractByIdResponse"></xs:element>
+
+<xs:element name="getContractList" type="tns:getContractList"></xs:element>
+
+<xs:element name="getContractListResponse" type="tns:getContractListResponse"></xs:element>
+
+<xs:element name="getFee" type="tns:getFee"></xs:element>
+
+<xs:element name="getFeeList" type="tns:getFeeList"></xs:element>
+
+<xs:element name="getFeeListByPartnerId" type="tns:getFeeListByPartnerId"></xs:element>
+
+<xs:element name="getFeeListByPartnerIdResponse" type="tns:getFeeListByPartnerIdResponse"></xs:element>
+
+<xs:element name="getFeeListResponse" type="tns:getFeeListResponse"></xs:element>
+
+<xs:element name="getFeeResponse" type="tns:getFeeResponse"></xs:element>
+
+<xs:element name="getGrowthValueList" type="tns:getGrowthValueList"></xs:element>
+
+<xs:element name="getGrowthValueListResponse" type="tns:getGrowthValueListResponse"></xs:element>
+
+<xs:element name="getIncomeListByIssuer" type="tns:getIncomeListByIssuer"></xs:element>
+
+<xs:element name="getIncomeListByIssuerResponse" type="tns:getIncomeListByIssuerResponse"></xs:element>
+
+<xs:element name="getIncomeTableByProvider" type="tns:getIncomeTableByProvider"></xs:element>
+
+<xs:element name="getIncomeTableByProviderResponse" type="tns:getIncomeTableByProviderResponse"></xs:element>
+
+<xs:element name="getIssuer" type="tns:getIssuer"></xs:element>
+
+<xs:element name="getIssuerListByContract" type="tns:getIssuerListByContract"></xs:element>
+
+<xs:element name="getIssuerListByContractResponse" type="tns:getIssuerListByContractResponse"></xs:element>
+
+<xs:element name="getIssuerPartnerList" type="tns:getIssuerPartnerList"></xs:element>
+
+<xs:element name="getIssuerPartnerListResponse" type="tns:getIssuerPartnerListResponse"></xs:element>
+
+<xs:element name="getIssuerPartnerValueList" type="tns:getIssuerPartnerValueList"></xs:element>
+
+<xs:element name="getIssuerPartnerValueListResponse" type="tns:getIssuerPartnerValueListResponse"></xs:element>
+
+<xs:element name="getIssuerPartnerWrapperList" type="tns:getIssuerPartnerWrapperList"></xs:element>
+
+<xs:element name="getIssuerPartnerWrapperListResponse" type="tns:getIssuerPartnerWrapperListResponse"></xs:element>
+
+<xs:element name="getIssuerResponse" type="tns:getIssuerResponse"></xs:element>
+
+<xs:element name="getIssuerShareList" type="tns:getIssuerShareList"></xs:element>
+
+<xs:element name="getIssuerShareListResponse" type="tns:getIssuerShareListResponse"></xs:element>
+
+<xs:element name="getLatestCardVolumeList" type="tns:getLatestCardVolumeList"></xs:element>
+
+<xs:element name="getLatestCardVolumeListResponse" type="tns:getLatestCardVolumeListResponse"></xs:element>
+
+<xs:element name="getListCardByIssuerId" type="tns:getListCardByIssuerId"></xs:element>
+
+<xs:element name="getListCardByIssuerIdResponse" type="tns:getListCardByIssuerIdResponse"></xs:element>
+
+<xs:element name="getMonthIncomeList" type="tns:getMonthIncomeList"></xs:element>
+
+<xs:element name="getMonthIncomeListResponse" type="tns:getMonthIncomeListResponse"></xs:element>
+
+<xs:element name="getNewPaymentList" type="tns:getNewPaymentList"></xs:element>
+
+<xs:element name="getNewPaymentListResponse" type="tns:getNewPaymentListResponse"></xs:element>
+
+<xs:element name="getParShareList" type="tns:getParShareList"></xs:element>
+
+<xs:element name="getParShareListResponse" type="tns:getParShareListResponse"></xs:element>
+
+<xs:element name="getPartnerByIdMySql" type="tns:getPartnerByIdMySql"></xs:element>
+
+<xs:element name="getPartnerByIdMySqlResponse" type="tns:getPartnerByIdMySqlResponse"></xs:element>
+
+<xs:element name="getPartnerIncome" type="tns:getPartnerIncome"></xs:element>
+
+<xs:element name="getPartnerIncomeListByPartnerAndIssuer" type="tns:getPartnerIncomeListByPartnerAndIssuer"></xs:element>
+
+<xs:element name="getPartnerIncomeListByPartnerAndIssuerResponse" type="tns:getPartnerIncomeListByPartnerAndIssuerResponse"></xs:element>
+
+<xs:element name="getPartnerIncomeResponse" type="tns:getPartnerIncomeResponse"></xs:element>
+
+<xs:element name="getPartnerShareList" type="tns:getPartnerShareList"></xs:element>
+
+<xs:element name="getPartnerShareListResponse" type="tns:getPartnerShareListResponse"></xs:element>
+
+<xs:element name="getPaymentHistoryList" type="tns:getPaymentHistoryList"></xs:element>
+
+<xs:element name="getPaymentHistoryListResponse" type="tns:getPaymentHistoryListResponse"></xs:element>
+
+<xs:element name="getPaymentList" type="tns:getPaymentList"></xs:element>
+
+<xs:element name="getPaymentListResponse" type="tns:getPaymentListResponse"></xs:element>
+
+<xs:element name="getPaymentListTotal" type="tns:getPaymentListTotal"></xs:element>
+
+<xs:element name="getPaymentListTotalResponse" type="tns:getPaymentListTotalResponse"></xs:element>
+
+<xs:element name="getPaymentStatusList" type="tns:getPaymentStatusList"></xs:element>
+
+<xs:element name="getPaymentStatusListResponse" type="tns:getPaymentStatusListResponse"></xs:element>
+
+<xs:element name="getSumValueByPartner" type="tns:getSumValueByPartner"></xs:element>
+
+<xs:element name="getSumValueByPartnerResponse" type="tns:getSumValueByPartnerResponse"></xs:element>
+
+<xs:element name="getTopParList" type="tns:getTopParList"></xs:element>
+
+<xs:element name="getTopParListResponse" type="tns:getTopParListResponse"></xs:element>
+
+<xs:element name="getTopPartnerList" type="tns:getTopPartnerList"></xs:element>
+
+<xs:element name="getTopPartnerListResponse" type="tns:getTopPartnerListResponse"></xs:element>
+
+<xs:element name="getTotalPartnerMySql" type="tns:getTotalPartnerMySql"></xs:element>
+
+<xs:element name="getTotalPartnerMySqlResponse" type="tns:getTotalPartnerMySqlResponse"></xs:element>
+
+<xs:element name="getTransactionErrorPercentReport" type="tns:getTransactionErrorPercentReport"></xs:element>
+
+<xs:element name="getTransactionErrorPercentReportResponse" type="tns:getTransactionErrorPercentReportResponse"></xs:element>
+
+<xs:element name="getTransactionListByPartner" type="tns:getTransactionListByPartner"></xs:element>
+
+<xs:element name="getTransactionListByPartnerResponse" type="tns:getTransactionListByPartnerResponse"></xs:element>
+
+<xs:element name="insertCard" type="tns:insertCard"></xs:element>
+
+<xs:element name="insertCardResponse" type="tns:insertCardResponse"></xs:element>
+
+<xs:element name="insertContract" type="tns:insertContract"></xs:element>
+
+<xs:element name="insertContractResponse" type="tns:insertContractResponse"></xs:element>
+
+<xs:element name="insertFee" type="tns:insertFee"></xs:element>
+
+<xs:element name="insertFeeResponse" type="tns:insertFeeResponse"></xs:element>
+
+<xs:element name="insertIssuer" type="tns:insertIssuer"></xs:element>
+
+<xs:element name="insertIssuerResponse" type="tns:insertIssuerResponse"></xs:element>
+
+<xs:element name="insertPartnerMySql" type="tns:insertPartnerMySql"></xs:element>
+
+<xs:element name="insertPartnerMySqlResponse" type="tns:insertPartnerMySqlResponse"></xs:element>
+
+<xs:element name="loadContractPeriod" type="tns:loadContractPeriod"></xs:element>
+
+<xs:element name="loadContractPeriodResponse" type="tns:loadContractPeriodResponse"></xs:element>
+
+<xs:element name="loadPayment" type="tns:loadPayment"></xs:element>
+
+<xs:element name="loadPaymentResponse" type="tns:loadPaymentResponse"></xs:element>
+
+<xs:element name="loadTransaction" type="tns:loadTransaction"></xs:element>
+
+<xs:element name="loadTransactionResponse" type="tns:loadTransactionResponse"></xs:element>
+
+<xs:element name="savePaidTime" type="tns:savePaidTime"></xs:element>
+
+<xs:element name="savePaidTimeResponse" type="tns:savePaidTimeResponse"></xs:element>
+
+<xs:element name="savePaymentRequestTime" type="tns:savePaymentRequestTime"></xs:element>
+
+<xs:element name="savePaymentRequestTimeResponse" type="tns:savePaymentRequestTimeResponse"></xs:element>
+
+<xs:element name="saveSendCompareReportTime" type="tns:saveSendCompareReportTime"></xs:element>
+
+<xs:element name="saveSendCompareReportTimeResponse" type="tns:saveSendCompareReportTimeResponse"></xs:element>
+
+<xs:element name="updateCompareIssuerList" type="tns:updateCompareIssuerList"></xs:element>
+
+<xs:element name="updateCompareIssuerListResponse" type="tns:updateCompareIssuerListResponse"></xs:element>
+
+<xs:element name="updateComparePartnerList" type="tns:updateComparePartnerList"></xs:element>
+
+<xs:element name="updateComparePartnerListResponse" type="tns:updateComparePartnerListResponse"></xs:element>
+
+<xs:element name="updateContract" type="tns:updateContract"></xs:element>
+
+<xs:element name="updateContractPeriod" type="tns:updateContractPeriod"></xs:element>
+
+<xs:element name="updateContractPeriodDate" type="tns:updateContractPeriodDate"></xs:element>
+
+<xs:element name="updateContractPeriodDateResponse" type="tns:updateContractPeriodDateResponse"></xs:element>
+
+<xs:element name="updateContractPeriodResponse" type="tns:updateContractPeriodResponse"></xs:element>
+
+<xs:element name="updateContractResponse" type="tns:updateContractResponse"></xs:element>
+
+<xs:element name="updateContractStatus" type="tns:updateContractStatus"></xs:element>
+
+<xs:element name="updateContractStatusResponse" type="tns:updateContractStatusResponse"></xs:element>
+
+<xs:element name="updateFee" type="tns:updateFee"></xs:element>
+
+<xs:element name="updateFeeResponse" type="tns:updateFeeResponse"></xs:element>
+
+<xs:element name="updateIssuer" type="tns:updateIssuer"></xs:element>
+
+<xs:element name="updateIssuerPartner" type="tns:updateIssuerPartner"></xs:element>
+
+<xs:element name="updateIssuerPartnerResponse" type="tns:updateIssuerPartnerResponse"></xs:element>
+
+<xs:element name="updateIssuerResponse" type="tns:updateIssuerResponse"></xs:element>
+
+<xs:element name="updatePartnerMySql" type="tns:updatePartnerMySql"></xs:element>
+
+<xs:element name="updatePartnerMySqlResponse" type="tns:updatePartnerMySqlResponse"></xs:element>
+
+<xs:element name="updateStatus" type="tns:updateStatus"></xs:element>
+
+<xs:element name="updateStatusResponse" type="tns:updateStatusResponse"></xs:element>
+
+<xs:element name="updateTransaction" type="tns:updateTransaction"></xs:element>
+
+<xs:element name="updateTransactionResponse" type="tns:updateTransactionResponse"></xs:element>
+
+<xs:complexType name="loadContractPeriod">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="loadContractPeriodResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:contractPeriod" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="contractPeriod">
+<xs:sequence>
+<xs:element name="bankAccount0" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="bankAccount1" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="bankAccountHolder0" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="bankAccountHolder1" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="bankAddress0" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="bankAddress1" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="bankName0" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="bankName1" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="compareDate" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="contractId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="contractPeriodId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="endPeriodDate" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="f1" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="f2" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="f3" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="f4" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="f5" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="f6" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="f7" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="f8" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="income" type="xs:long" minOccurs="0"></xs:element>
+<xs:element name="office" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="originalValue" type="xs:long" minOccurs="0"></xs:element>
+<xs:element name="paid" type="xs:double" minOccurs="0"></xs:element>
+<xs:element name="paymentDate" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="paymentMethod" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="progress" type="xs:float" minOccurs="0"></xs:element>
+<xs:element name="proposalDate" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="proposalPerson" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="savedValue" type="xs:long" minOccurs="0"></xs:element>
+<xs:element name="startPeriodDate" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="status" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="statusId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="total" type="xs:long" minOccurs="0"></xs:element>
+<xs:element name="totalByWords" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="value" type="xs:long" minOccurs="0"></xs:element>
+<xs:element name="vat" type="xs:long" minOccurs="0"></xs:element>
+<xs:element name="voucherDescription" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="voucherNumber" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="voucherType" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getIncomeTableByProvider">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:boolean"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getIncomeTableByProviderResponse">
+<xs:sequence>
+<xs:element name="return" type="ns1:stringArray" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getFee">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getFeeResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:fee" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="fee">
+<xs:sequence>
+<xs:element name="contractId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="contractNumber" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="feeId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="high" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="issuerList" type="tns:issuer" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="low" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="status" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="issuer">
+<xs:sequence>
+<xs:element name="companyCode" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="companyName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="compareType" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="contractNumber" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="fee" type="xs:float" minOccurs="0"></xs:element>
+<xs:element name="fullName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="isLock" type="xs:boolean" minOccurs="0"></xs:element>
+<xs:element name="issuerId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="name" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCardVolumeListByPartner">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg3" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCardVolumeListByPartnerResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:cardVolume" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="cardVolume">
+<xs:sequence>
+<xs:element name="par" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="partnerName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="transactionDate" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="value" type="xs:long" minOccurs="0"></xs:element>
+<xs:element name="volume" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateStatus">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateStatusResponse">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateTransaction">
+<xs:sequence>
+<xs:element name="arg0" type="tns:transaction" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="transaction">
+<xs:sequence>
+<xs:element name="accountId" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="amount" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="cardCode" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="cardId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="cardSerial" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="cardType" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="count" type="xs:int"></xs:element>
+<xs:element name="issuerId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="par" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="partnerCode" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="partnerId" type="xs:int"></xs:element>
+<xs:element name="provider" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="providerCode" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="providerId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="requestTimeDate" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="responseDescription" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="responseStatus" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="responseTimeDate" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="telcoTransRefId" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="transRefId" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="transactionId" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateTransactionResponse">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateIssuer">
+<xs:sequence>
+<xs:element name="arg0" type="tns:issuer" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateIssuerResponse">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCardVolumeListByPartnerEachDay">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg3" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg4" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg5" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCardVolumeListByPartnerEachDayResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:cardVolume" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateContractPeriod">
+<xs:sequence>
+<xs:element name="arg0" type="tns:contractPeriod" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateContractPeriodResponse">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTransactionErrorPercentReport">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:int"></xs:element>
+<xs:element name="arg3" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTransactionErrorPercentReportResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:issuerPartnerWrapper" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="issuerPartnerWrapper">
+<xs:sequence>
+<xs:element name="id" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="isLock" type="xs:boolean" minOccurs="0"></xs:element>
+<xs:element name="issuerPartnerList" type="tns:issuerPartner" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="name" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="issuerPartner">
+<xs:sequence>
+<xs:element name="applySalesLimit" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="applySalesPercent" type="xs:float" minOccurs="0"></xs:element>
+<xs:element name="configSalesLimit" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="configSalesPercent" type="xs:float" minOccurs="0"></xs:element>
+<xs:element name="currentSales" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="currentSalesPercent" type="xs:float" minOccurs="0"></xs:element>
+<xs:element name="isLock" type="xs:boolean" minOccurs="0"></xs:element>
+<xs:element name="issuer" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="issuerId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="partner" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="partnerId" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="changePassword">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int"></xs:element>
+<xs:element name="arg1" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="changePasswordResponse">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateComparePartnerList">
+<xs:sequence>
+<xs:element name="arg0" type="tns:comparePartner" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="comparePartner">
+<xs:sequence>
+<xs:element name="amount" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="companyIncome" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="companyValue" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="comparePartnerId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="originalVolume" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="partnerIncome" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="partnerValue" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="partnerVolume" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="paymentId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="vietpayVolume" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateComparePartnerListResponse">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getSumValueByPartner">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg3" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getSumValueByPartnerResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:long" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="insertContract">
+<xs:sequence>
+<xs:element name="arg0" type="tns:contract" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="contract">
+<xs:sequence>
+<xs:element name="compareChoice" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="contractId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="contractNumber" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="createDate" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="endPeriodDate" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="expireDate" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="fromDate" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="issuerList" type="tns:issuer" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="maxCompareDay" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="maxPaymentDay" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="partnerId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="partnerName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="paymentMethod" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="paymentPeriodAmount" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="paymentPeriodId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="paymentPeriodName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="startChoice" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="startPeriodDate" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="status" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="toDate" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="version" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="insertContractResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getIssuerShareList">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getIssuerShareListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:chartModel" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="chartModel">
+<xs:sequence>
+<xs:element name="id" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="name" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="percent" type="xs:float" minOccurs="0"></xs:element>
+<xs:element name="value" type="xs:long" minOccurs="0"></xs:element>
+<xs:element name="volume" type="xs:long" minOccurs="0"></xs:element>
+<xs:element name="volumePercent" type="xs:float" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="savePaymentRequestTime">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="savePaymentRequestTimeResponse">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllIssuer">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllIssuerResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:issuer" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPaymentStatusList">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPaymentStatusListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:paymentStatus" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="paymentStatus">
+<xs:sequence>
+<xs:element name="name" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="statusId" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="insertPartnerMySql">
+<xs:sequence>
+<xs:element name="arg0" type="tns:partner" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="partner">
+<xs:sequence>
+<xs:element name="bankAccount0" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="bankAccount1" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="bankAccountHolder0" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="bankAccountHolder1" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="bankAddress0" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="bankAddress1" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="bankName0" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="bankName1" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="businessContactEmail" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="businessContactName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="businessContactPhone" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="className" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="compareContactEmail" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="compareContactName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="compareContactPhone" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="createDate" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="isLock" type="xs:boolean"></xs:element>
+<xs:element name="isProvider" type="xs:boolean" minOccurs="0"></xs:element>
+<xs:element name="jarName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="mailAddress" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="partnerCode" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="partnerId" type="xs:int"></xs:element>
+<xs:element name="partnerName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="password" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="phone" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="secretKey" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="techniqueContactEmail" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="techniqueContactName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="techniqueContactPhone" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="validIps" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="website" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="insertPartnerMySqlResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateFee">
+<xs:sequence>
+<xs:element name="arg0" type="tns:fee" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateFeeResponse">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="countTransactionListByPartner">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg3" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg4" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg5" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg6" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="countTransactionListByPartnerResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getIssuerPartnerValueList">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getIssuerPartnerValueListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:issuerPartnerWrapper" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="countCardVolumeByAllPartnerEachDay">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:boolean" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg3" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg4" type="xs:boolean" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="countCardVolumeByAllPartnerEachDayResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getContractById">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getContractByIdResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:contract" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getParShareList">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg3" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getParShareListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:chartModel" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getMonthIncomeList">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg3" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getMonthIncomeListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:monthIncome" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="monthIncome">
+<xs:complexContent>
+<xs:extension base="tns:income">
+<xs:sequence>
+<xs:element name="month" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="year" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="income">
+<xs:sequence>
+<xs:element name="fee" type="xs:float" minOccurs="0"></xs:element>
+<xs:element name="incomeValue" type="xs:double" minOccurs="0"></xs:element>
+<xs:element name="name" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="originalValue" type="xs:double" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPaymentList">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:boolean" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg3" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg4" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg5" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg6" type="xs:boolean"></xs:element>
+<xs:element name="arg7" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg8" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPaymentListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:payment" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="payment">
+<xs:complexContent>
+<xs:extension base="tns:contractPeriod">
+<xs:sequence>
+<xs:element name="fee" type="xs:float" minOccurs="0"></xs:element>
+<xs:element name="issuerId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="issuerName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="originalFee" type="xs:float" minOccurs="0"></xs:element>
+<xs:element name="originalIncome" type="xs:long" minOccurs="0"></xs:element>
+<xs:element name="partnerId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="partnerName" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="paymentId" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="getFeeListByPartnerId">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getFeeListByPartnerIdResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:fee" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="saveSendCompareReportTime">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="saveSendCompareReportTimeResponse">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTotalPartnerMySql">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:boolean" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:boolean" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTotalPartnerMySqlResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTopParList">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:boolean"></xs:element>
+<xs:element name="arg3" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg4" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTopParListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:chartModel" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="calculateContract">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="calculateContractResponse">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="changeLockStatus">
+<xs:sequence>
+<xs:element name="partnerId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="issuerId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="isLock" type="xs:boolean"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="changeLockStatusResponse">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deleteIssuer">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deleteIssuerResponse">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPaymentHistoryList">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPaymentHistoryListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:paymentHistory" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="paymentHistory">
+<xs:sequence>
+<xs:element name="contractPeriodId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="description" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="lastModified" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="statusId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="type" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getComparePartnerList">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getComparePartnerListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:comparePartner" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="insertCard">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="insertCardResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateContractPeriodDate">
+<xs:sequence>
+<xs:element name="arg0" type="tns:contract" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateContractPeriodDateResponse">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deletePartnerByIdMySql">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deletePartnerByIdMySqlResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPartnerIncomeListByPartnerAndIssuer">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg3" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPartnerIncomeListByPartnerAndIssuerResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:partnerIncome" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="partnerIncome">
+<xs:complexContent>
+<xs:extension base="tns:income">
+<xs:sequence>
+<xs:element name="issuerName" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="deleteContract">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deleteContractResponse">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateContractStatus">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateContractStatusResponse">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="savePaidTime">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:long" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:float" minOccurs="0"></xs:element>
+<xs:element name="arg3" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="savePaidTimeResponse">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="createPayment">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="createPaymentResponse">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getFeeList">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getFeeListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:fee" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateCompareIssuerList">
+<xs:sequence>
+<xs:element name="arg0" type="tns:compareIssuer" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="compareIssuer">
+<xs:sequence>
+<xs:element name="amount" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="cardId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="compareIssuerId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="issuerVolume" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="month" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="originalVolume" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="requestDate" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="vietpayVolume" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="year" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateCompareIssuerListResponse">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateIssuerPartner">
+<xs:sequence>
+<xs:element name="issuerPartnerList" type="tns:issuerPartner" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateIssuerPartnerResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deleteFee">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deleteFeeResponse">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="loadPayment">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="loadPaymentResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:payment" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPartnerIncome">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg3" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPartnerIncomeResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:income" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCompareIssuerList">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCompareIssuerListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:compareIssuer" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCardVolumeList">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg3" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg4" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg5" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCardVolumeListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:cardVolume" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPartnerByIdMySql">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPartnerByIdMySqlResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:partner" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTopPartnerList">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg3" type="xs:boolean"></xs:element>
+<xs:element name="arg4" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg5" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTopPartnerListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:chartModel" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="countCardVolumeList">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg3" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="countCardVolumeListResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="insertFee">
+<xs:sequence>
+<xs:element name="arg0" type="tns:fee" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="insertFeeResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCardVolumeByAllPartnerEachDay">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:boolean" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg3" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg4" type="xs:boolean" minOccurs="0"></xs:element>
+<xs:element name="arg5" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg6" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCardVolumeByAllPartnerEachDayResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:cardVolume" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="calculateFee">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg3" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg4" type="xs:long" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="calculateFeeResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:float" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getNewPaymentList">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getNewPaymentListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:payment" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updatePartnerMySql">
+<xs:sequence>
+<xs:element name="arg0" type="tns:partner" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updatePartnerMySqlResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deleteCard">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deleteCardResponse">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllListPartnerMySql">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:boolean" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:boolean" minOccurs="0"></xs:element>
+<xs:element name="arg3" type="xs:int"></xs:element>
+<xs:element name="arg4" type="xs:int"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAllListPartnerMySqlResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:partner" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="checkTransactionBySerialMySql">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg3" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg4" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="checkTransactionBySerialMySqlResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:transaction" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getContractList">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg3" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg4" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg5" type="xs:boolean"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getContractListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:contract" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getLatestCardVolumeList">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg3" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getLatestCardVolumeListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:cardVolume" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getIssuerPartnerWrapperList">
+<xs:sequence>
+<xs:element name="viewType" type="xs:int"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getIssuerPartnerWrapperListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:issuerPartnerWrapper" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getIssuerPartnerList">
+<xs:sequence>
+<xs:element name="viewType" type="xs:int"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getIssuerPartnerListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:issuerPartner" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="checkTransactionBySerial">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg3" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="arg4" type="xs:dateTime" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="checkTransactionBySerialResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:transaction" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="loadTransaction">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="loadTransactionResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:transaction" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTransactionListByPartner">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg3" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg4" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg5" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg6" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg7" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg8" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTransactionListByPartnerResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:transaction" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getIssuerListByContract">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getIssuerListByContractResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:issuer" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPaymentListTotal">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:boolean" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg3" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg4" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg5" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPaymentListTotalResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:payment" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getIncomeListByIssuer">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="arg1" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getIncomeListByIssuerResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:income" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getGrowthValueList">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg3" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg4" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg5" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getGrowthValueListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:chartModel" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="insertIssuer">
+<xs:sequence>
+<xs:element name="arg0" type="tns:issuer" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="insertIssuerResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="countPaymentList">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:boolean" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg3" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg4" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg5" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg6" type="xs:boolean"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="countPaymentListResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getListCardByIssuerId">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:boolean"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getListCardByIssuerIdResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:card" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="card">
+<xs:sequence>
+<xs:element name="cardId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="issuerId" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="par" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPartnerShareList">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPartnerShareListResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:chartModel" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="countCardVolumeListByPartnerEachDay">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg1" type="xs:int" minOccurs="0"></xs:element>
+<xs:element name="arg2" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arg3" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="countCardVolumeListByPartnerEachDayResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getIssuer">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getIssuerResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:issuer" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateContract">
+<xs:sequence>
+<xs:element name="arg0" type="tns:contract" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateContractResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

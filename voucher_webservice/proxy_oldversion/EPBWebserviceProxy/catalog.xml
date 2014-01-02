@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://123.30.169.75:8080/webservice/TelcoAPI?wsdl" uri="xml-resources/web-service-references/TelcoAPI/wsdl/123.30.169.75_8080/webservice/TelcoAPI.wsdl"/>
+</catalog>
+

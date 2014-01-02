@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="partner">
+    <typeAlias alias="partnerDto" type="com.vss.cardservice.dto.Partner"/>
+
+    <select id="getPartnerList" resultClass="partnerDto" parameterClass="Map">
+        select t.partnerId,
+        t.partnerCode,
+        t.createDate,
+        t.secretKey,
+        t.password,
+        t.isLock,
+        t.isProvider,
+        t.notes,
+        t.validIps,
+        t.mailAddress,
+        t.partnerName,
+        t.phone,
+        t.jarName,
+        t.className,
+        t.keepSession,
+        t.sessionValue,
+        t.isConnected,
+        t.businessContactName KD_HoTen,
+        t.businessContactEmail KD_Email,
+        t.businessContactPhone KD_DT,
+        t.techniqueContactName KT_HoTen,
+        t.techniqueContactEmail KT_Email,
+        t.techniqueContactPhone KT_DT,
+        t.compareContactName DS_HoTen,
+        t.compareContactEmail DS_Email,
+        t.compareContactPhone DS_DT
+        from partner t where true
+        <dynamic>
+            <isNotNull property="isLock" >
+                AND isLock = #isLock#
+            </isNotNull>
+            <isNotNull property="partnerCode">
+                AND partnerCode = #partnerCode#
+            </isNotNull>
+            <isNotNull property="isProvider">
+                AND isProvider = $isProvider$
+            </isNotNull>
+            <isNotNull property="keepSession">
+                AND keepSession = #keepSession#
+            </isNotNull>
+        </dynamic>
+    </select>
+
+    <update id="updatePartner" parameterClass="partnerDto">
+        update partner
+        set isConnected = #isConnected#
+        where partnerCode = #partnerCode#
+    </update>
+    
+    <update id="updateSessionValue" parameterClass="Map">
+        update partner
+        set sessionValue = #sessionValue#
+        where partnerCode = #partnerCode#
+    </update>
+
+    <select id="getProcessPartner" resultClass="partnerDto" parameterClass="Integer">
+        SELECT p.partnerId, p.partnerCode, jarName, className, ip.currentSalesPercent - ip.applySalesPercent as percent 
+        FROM issuer_partner ip 
+        INNER JOIN partner p ON ip.partnerId = p.partnerId
+        WHERE ip.issuerId = $issuerId$ AND NOT ip.isLock AND applySalesPercent > 0 AND (applySalesLimit IS NULL OR applySalesLimit*1E6 > currentSales) 
+        ORDER BY percent ASC LIMIT 1
+    </select>
+    
+    <select id="checkLockIssuerPartner" resultClass="Integer" parameterClass="Map">
+        SELECT sf_checkLockIssuerPartner($providerId$,$issuerId$) a
+    </select>
+</sqlMap>

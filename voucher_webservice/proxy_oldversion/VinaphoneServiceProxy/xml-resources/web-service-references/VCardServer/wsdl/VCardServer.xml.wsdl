@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://vchgws.elcom.com" xmlns:ns1="http://message.vchgws.elcom.com" xmlns:soapenc12="http://www.w3.org/2003/05/soap-encoding" xmlns:tns="http://vchgws.elcom.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap11="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc11="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
+  <wsdl:types>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://vchgws.elcom.com">
+<xsd:element name="load_new">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="in0" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="in1" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="in2" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="in3" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="in4" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="in5" type="xsd:int"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="in6" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="load_newResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:LoadResponse"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="change_mpin">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="in0" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="in1" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="in2" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="in3" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="change_mpinResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:ChangeMPINResponse"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="logout">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="in0" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="logoutResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:LogoutResponse"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="login">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="in0" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="in1" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="in2" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="loginResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:LoginResponse"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="load">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="in0" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="in1" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="in2" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="in3" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="in4" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="in5" type="xsd:int"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="loadResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:LoadResponse"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="today_enquiry">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="in0" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="in1" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="in2" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="today_enquiryResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:TodayEnquiryResponse"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="change_password">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="in0" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="in1" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="in2" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="in3" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="change_passwordResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="ns1:ChangePasswordResponse"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:schema>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://message.vchgws.elcom.com">
+<xsd:complexType name="LoadResponse">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="DRemainAmount" type="xsd:double"/>
+<xsd:element minOccurs="0" name="SSerialNumber" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="message" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="status" type="xsd:int"/>
+<xsd:element minOccurs="0" name="transid" type="xsd:long"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ChangeMPINResponse">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="message" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="status" type="xsd:int"/>
+<xsd:element minOccurs="0" name="transid" type="xsd:long"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="LogoutResponse">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="message" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="status" type="xsd:int"/>
+<xsd:element minOccurs="0" name="transid" type="xsd:long"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="LoginResponse">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="message" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="sessionid" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="status" type="xsd:int"/>
+<xsd:element minOccurs="0" name="transid" type="xsd:long"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="TodayEnquiryResponse">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="DTotalAmountToday" type="xsd:double"/>
+<xsd:element minOccurs="0" name="message" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="status" type="xsd:int"/>
+<xsd:element minOccurs="0" name="transid" type="xsd:long"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ChangePasswordResponse">
+<xsd:sequence>
+<xsd:element minOccurs="0" name="message" nillable="true" type="xsd:string"/>
+<xsd:element minOccurs="0" name="status" type="xsd:int"/>
+<xsd:element minOccurs="0" name="transid" type="xsd:long"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="load_newRequest">
+    <wsdl:part name="parameters" element="tns:load_new">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="change_passwordResponse">
+    <wsdl:part name="parameters" element="tns:change_passwordResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="change_passwordRequest">
+    <wsdl:part name="parameters" element="tns:change_password">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="logoutRequest">
+    <wsdl:part name="parameters" element="tns:logout">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="change_mpinRequest">
+    <wsdl:part name="parameters" element="tns:change_mpin">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="today_enquiryResponse">
+    <wsdl:part name="parameters" element="tns:today_enquiryResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="loadResponse">
+    <wsdl:part name="parameters" element="tns:loadResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="today_enquiryRequest">
+    <wsdl:part name="parameters" element="tns:today_enquiry">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="loginResponse">
+    <wsdl:part name="parameters" element="tns:loginResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="loadRequest">
+    <wsdl:part name="parameters" element="tns:load">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="logoutResponse">
+    <wsdl:part name="parameters" element="tns:logoutResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="change_mpinResponse">
+    <wsdl:part name="parameters" element="tns:change_mpinResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="load_newResponse">
+    <wsdl:part name="parameters" element="tns:load_newResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="loginRequest">
+    <wsdl:part name="parameters" element="tns:login">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="VCardServerPortType">
+    <wsdl:operation name="load_new">
+      <wsdl:input name="load_newRequest" message="tns:load_newRequest">
+    </wsdl:input>
+      <wsdl:output name="load_newResponse" message="tns:load_newResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="change_mpin">
+      <wsdl:input name="change_mpinRequest" message="tns:change_mpinRequest">
+    </wsdl:input>
+      <wsdl:output name="change_mpinResponse" message="tns:change_mpinResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="logout">
+      <wsdl:input name="logoutRequest" message="tns:logoutRequest">
+    </wsdl:input>
+      <wsdl:output name="logoutResponse" message="tns:logoutResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="login">
+      <wsdl:input name="loginRequest" message="tns:loginRequest">
+    </wsdl:input>
+      <wsdl:output name="loginResponse" message="tns:loginResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="load">
+      <wsdl:input name="loadRequest" message="tns:loadRequest">
+    </wsdl:input>
+      <wsdl:output name="loadResponse" message="tns:loadResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="today_enquiry">
+      <wsdl:input name="today_enquiryRequest" message="tns:today_enquiryRequest">
+    </wsdl:input>
+      <wsdl:output name="today_enquiryResponse" message="tns:today_enquiryResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="change_password">
+      <wsdl:input name="change_passwordRequest" message="tns:change_passwordRequest">
+    </wsdl:input>
+      <wsdl:output name="change_passwordResponse" message="tns:change_passwordResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="VCardServerHttpBinding" type="tns:VCardServerPortType">
+    <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="load_new">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="load_newRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="load_newResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="change_mpin">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="change_mpinRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="change_mpinResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="logout">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="logoutRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="logoutResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="login">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="loginRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="loginResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="load">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="loadRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="loadResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="today_enquiry">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="today_enquiryRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="today_enquiryResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="change_password">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="change_passwordRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="change_passwordResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="VCardServer">
+    <wsdl:port name="VCardServerHttpPort" binding="tns:VCardServerHttpBinding">
+      <wsdlsoap:address location="http://192.168.117.166:8089/VCardServer/services/VCardServer"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

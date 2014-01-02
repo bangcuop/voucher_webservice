@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="https://sandbox-ops.gate.vn:7001/Igate_WS/Route?wsdl" uri="wsdl/sandbox-ops.gate.vn_7001/Igate_WS/Route.wsdl"/>
+    <system systemId="https://sandbox-ops.gate.vn:7001/Igate_WS/Route?SCHEMA%2FIgate_SandBox%2Fwsdl%2FRouteIgateService" uri="wsdl/sandbox-ops.gate.vn_7001/Igate_WS/Route.schema/igate_sandbox/wsdl/routeigateservice.xsd"/>
+</catalog>

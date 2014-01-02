@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xalan="http://xml.apache.org/xslt" xmlns:j2seproject3="http://www.netbeans.org/ns/j2se-project/3" xmlns:jaxws="http://www.netbeans.org/ns/jax-ws/1">
+    <!--
+                ===================
+                JAX-WS WSIMPORT SECTION
+                ===================
+            -->
+    <target name="wsimport-init" depends="init">
+        <mkdir dir="${build.generated.sources.dir}/jax-ws"/>
+        <taskdef name="wsimport" classname="com.sun.tools.ws.ant.WsImport">
+            <classpath path="${libs.jaxws21.classpath}"/>
+        </taskdef>
+    </target>
+    <target name="wsimport-client-card" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/card"/>
+        <property name="wsdl-card" location="xml-resources/web-service-references/card/wsdl/sandbox2.vtcebank.vn/WSCard2010/card.asmx.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/card" destdir="${build.generated.dir}/jax-wsCache/card" wsdl="${wsdl-card}" catalog="catalog.xml" extension="true" verbose="true" wsdlLocation="http://sandbox2.vtcebank.vn/WSCard2010/card.asmx?wsdl" xnocompile="true">
+            <depends file="${wsdl-card}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/card"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/card">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-card" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/card"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/webapi/card/vtconline"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-card"/>
+</project>

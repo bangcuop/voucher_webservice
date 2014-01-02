@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://sandbox2.vtcebank.vn/WSCard2010/card.asmx?wsdl" uri="xml-resources/web-service-references/card/wsdl/sandbox2.vtcebank.vn/WSCard2010/card.asmx.wsdl"/>
+    <system systemId="http://117.103.192.45/WSCard2010/card.asmx?WSDL" uri="xml-resources/web-service-references/card_1/wsdl/117.103.192.45/WSCard2010/card.asmx.wsdl"/>
+    <system systemId="http://sandbox2.vtcebank.vn/WSCard2010/card.asmx" uri="xml-resources/web-service-references/card/wsdl/sandbox2.vtcebank.vn/WSCard2010/card.asmx"/>
+    <system systemId="http://sandbox2.vtcebank.vn/WSCard2010/card.asmx?WSDL" uri="xml-resources/web-service-references/card/wsdl/sandbox2.vtcebank.vn/WSCard2010/card.asmx.wsdl"/>
+</catalog>
+

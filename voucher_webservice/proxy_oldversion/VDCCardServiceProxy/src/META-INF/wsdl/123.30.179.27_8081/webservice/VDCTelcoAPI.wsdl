@@ -1,0 +1,271 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="TelcoWebServiceImplService" targetNamespace="http://ws.secondtelcoAPI.vdconline.vn/" xmlns:ns1="http://cxf.apache.org/bindings/xformat" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://ws.secondtelcoAPI.vdconline.vn/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+<xs:schema elementFormDefault="unqualified" targetNamespace="http://ws.secondtelcoAPI.vdconline.vn/" version="1.0" xmlns:tns="http://ws.secondtelcoAPI.vdconline.vn/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="CardCharge" type="tns:CardCharge" />
+<xs:element name="CardChargeResponse" type="tns:CardChargeResponse" />
+<xs:element name="ChangeMPIN" type="tns:ChangeMPIN" />
+<xs:element name="ChangeMPINResponse" type="tns:ChangeMPINResponse" />
+<xs:element name="ChangePassword" type="tns:ChangePassword" />
+<xs:element name="ChangePasswordResponse" type="tns:ChangePasswordResponse" />
+<xs:element name="TestConnect" type="tns:TestConnect" />
+<xs:element name="TestConnectResponse" type="tns:TestConnectResponse" />
+<xs:element name="logIn" type="tns:logIn" />
+<xs:element name="logInResponse" type="tns:logInResponse" />
+<xs:element name="logOut" type="tns:logOut" />
+<xs:element name="logOutResponse" type="tns:logOutResponse" />
+<xs:complexType name="ChangeMPIN">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string" />
+      <xs:element name="arg1" type="xs:int" />
+      <xs:element minOccurs="0" name="arg2" type="xs:string" />
+      <xs:element minOccurs="0" name="arg3" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="ChangeMPINResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:changeResponse" />
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="changeResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+      <xs:element minOccurs="0" name="status" type="xs:int" />
+      <xs:element minOccurs="0" name="transid" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="ChangePassword">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string" />
+      <xs:element name="arg1" type="xs:int" />
+      <xs:element minOccurs="0" name="arg2" type="xs:string" />
+      <xs:element minOccurs="0" name="arg3" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="ChangePasswordResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:changeResponse" />
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="CardCharge">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string" />
+      <xs:element name="arg1" type="xs:long" />
+      <xs:element minOccurs="0" name="arg2" type="xs:string" />
+      <xs:element minOccurs="0" name="arg3" type="xs:string" />
+      <xs:element minOccurs="0" name="arg4" type="xs:string" />
+      <xs:element minOccurs="0" name="arg5" type="xs:string" />
+      <xs:element minOccurs="0" name="arg6" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="CardChargeResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:chargeResponse" />
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="chargeResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DRemainAmount" type="xs:string" />
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+      <xs:element minOccurs="0" name="SSerialNumber" type="xs:string" />
+      <xs:element minOccurs="0" name="status" type="xs:int" />
+      <xs:element minOccurs="0" name="transid" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="logIn">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string" />
+      <xs:element minOccurs="0" name="arg1" type="xs:string" />
+      <xs:element name="arg2" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="logInResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:loginResponse" />
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="loginResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+      <xs:element minOccurs="0" name="sessionid" type="xs:string" />
+      <xs:element minOccurs="0" name="status" type="xs:int" />
+      <xs:element minOccurs="0" name="transid" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="TestConnect">
+    <xs:sequence />
+  </xs:complexType>
+<xs:complexType name="TestConnectResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:loginResponse" />
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="logOut">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string" />
+      <xs:element name="arg1" type="xs:int" />
+      <xs:element minOccurs="0" name="arg2" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="logOutResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:logoutResponse" />
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="logoutResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string" />
+      <xs:element minOccurs="0" name="status" type="xs:int" />
+      <xs:element minOccurs="0" name="transid" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="ChangeMPINResponse">
+    <wsdl:part element="tns:ChangeMPINResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="logOutResponse">
+    <wsdl:part element="tns:logOutResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="logOut">
+    <wsdl:part element="tns:logOut" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CardChargeResponse">
+    <wsdl:part element="tns:CardChargeResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="logInResponse">
+    <wsdl:part element="tns:logInResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ChangeMPIN">
+    <wsdl:part element="tns:ChangeMPIN" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="logIn">
+    <wsdl:part element="tns:logIn" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordResponse">
+    <wsdl:part element="tns:ChangePasswordResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="TestConnectResponse">
+    <wsdl:part element="tns:TestConnectResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CardCharge">
+    <wsdl:part element="tns:CardCharge" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ChangePassword">
+    <wsdl:part element="tns:ChangePassword" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="TestConnect">
+    <wsdl:part element="tns:TestConnect" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="TelcoWebService">
+    <wsdl:operation name="ChangeMPIN">
+      <wsdl:input message="tns:ChangeMPIN" name="ChangeMPIN">
+    </wsdl:input>
+      <wsdl:output message="tns:ChangeMPINResponse" name="ChangeMPINResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePassword">
+      <wsdl:input message="tns:ChangePassword" name="ChangePassword">
+    </wsdl:input>
+      <wsdl:output message="tns:ChangePasswordResponse" name="ChangePasswordResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CardCharge">
+      <wsdl:input message="tns:CardCharge" name="CardCharge">
+    </wsdl:input>
+      <wsdl:output message="tns:CardChargeResponse" name="CardChargeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="logIn">
+      <wsdl:input message="tns:logIn" name="logIn">
+    </wsdl:input>
+      <wsdl:output message="tns:logInResponse" name="logInResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestConnect">
+      <wsdl:input message="tns:TestConnect" name="TestConnect">
+    </wsdl:input>
+      <wsdl:output message="tns:TestConnectResponse" name="TestConnectResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="logOut">
+      <wsdl:input message="tns:logOut" name="logOut">
+    </wsdl:input>
+      <wsdl:output message="tns:logOutResponse" name="logOutResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TelcoWebServiceImplServiceSoapBinding" type="tns:TelcoWebService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ChangeMPIN">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="ChangeMPIN">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ChangeMPINResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePassword">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="ChangePassword">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ChangePasswordResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CardCharge">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="CardCharge">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="CardChargeResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestConnect">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="TestConnect">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="TestConnectResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="logIn">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="logIn">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="logInResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="logOut">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="logOut">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="logOutResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TelcoWebServiceImplService">
+    <wsdl:port binding="tns:TelcoWebServiceImplServiceSoapBinding" name="TelcoWebServiceImplPort">
+      <soap:address location="http://123.30.179.27:8081/webservice/VDCTelcoAPI" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

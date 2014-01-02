@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="https://115.84.178.2:8443/ScratchCardAPI/ScratchCardAPI?wsdl" uri="xml-resources/web-service-references/ScratchCardAPI/wsdl/115.84.178.2_8443/ScratchCardAPI/ScratchCardAPI.wsdl"/>
+    <system systemId="https://115.84.178.2:8443/ScratchCardAPI/ScratchCardAPI?xsd=1" uri="xml-resources/web-service-references/ScratchCardAPI/wsdl/115.84.178.2_8443/ScratchCardAPI/ScratchCardAPI.xsd_1.xsd"/>
+    <system systemId="https://125.235.33.166:8443/ScratchCardAPI/ScratchCardAPI?wsdl" uri="xml-resources/web-service-references/ScratchCardAPI/wsdl/125.235.33.166_8443/ScratchCardAPI/ScratchCardAPI.wsdl"/>
+    <system systemId="https://125.235.33.166:8443/ScratchCardAPI/ScratchCardAPI?xsd=1" uri="xml-resources/web-service-references/ScratchCardAPI/wsdl/125.235.33.166_8443/ScratchCardAPI/ScratchCardAPI.xsd_1.xsd"/>
+</catalog>

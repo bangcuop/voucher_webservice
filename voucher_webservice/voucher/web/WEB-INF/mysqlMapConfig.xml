@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig
+  PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+  "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+    <settings useStatementNamespaces="true"
+    		  cacheModelsEnabled="true"
+    		  lazyLoadingEnabled="true"
+    		  enhancementEnabled="true" 
+    		  statementCachingEnabled="true"/>
+    <sqlMap resource="ibatis/Partner.xml"/>
+    <sqlMap resource="ibatis/Transaction.xml"/>
+    <sqlMap resource="ibatis/Issuer.xml"/>
+    <sqlMap resource="ibatis/Card.xml"/>
+    <sqlMap resource="ibatis/Account.xml"/>
+<!--    <sqlMap resource="ibatis/Provider.xml"/>-->
+</sqlMapConfig>

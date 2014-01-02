@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--
+    Document   : issuer.xml
+    Created on : July 25, 2011, 3:38 PM
+    Author     : zannami
+    Description:
+        Purpose of the document follows.
+-->
+<sqlMap namespace="card">
+    <insert id="createCard" parameterClass="Map">
+        INSERT INTO card(issuerId, par)
+        VALUES(#issuerId#,#par#)
+        <selectKey resultClass="Long">
+            select LAST_INSERT_ID() as id
+        </selectKey>
+    </insert>
+    <select id="getCardIdByIssuerAndPar" parameterClass="com.vss.cardservice.dto.Transaction" resultClass="Integer">
+        select cardId from card where issuerId = $issuer$ and par = $amount$
+    </select>
+</sqlMap>

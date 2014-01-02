@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/C:/Users/thang.tranquyet/Desktop/h2t.xml" uri="xml-resources/web-service-references/h2t/wsdl/h2t.xml.wsdl"/>
+    <system systemId="file:/D:/h2t1.xml" uri="xml-resources/web-service-references/h2t/wsdl/h2t1.xml.xsd"/>
+</catalog>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://192.168.117.166:8089/VCardServer/services/VCardServer?wsdl" uri="wsdl/192.168.117.166_8089/VCardServer/services/VCardServer.wsdl"/>
+</catalog>
+

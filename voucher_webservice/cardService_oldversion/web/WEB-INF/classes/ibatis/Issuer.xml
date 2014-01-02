@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--
+    Document   : issuer.xml
+    Created on : July 25, 2011, 3:38 PM
+    Author     : zannami
+    Description:
+        Purpose of the document follows.
+-->
+<sqlMap namespace="issuer">
+    <select id="getCardIdByIssuer" parameterClass="Map" resultClass="Integer">
+        SELECT c.cardId
+        FROM card c
+        INNER JOIN issuer i
+        ON upper(i.name) = upper(#issuer#)
+              AND c.par = #par#
+              AND c.issuerId = i.issuerId
+    </select>
+
+    <select id="getListIssuer" resultClass="com.vss.cardservice.dto.Issuer" parameterClass="Map">
+        select i.issuerId, i.name issuer, c.cardId cardId, c.par, i.sessionValue
+        from card c
+        inner join issuer i
+        on c.issuerId = i.issuerId
+        <dynamic>
+            <isNotNull property="issuerid">
+                AND c.issuerId = $issuerid$
+            </isNotNull>
+            <isNotNull property="name">
+                AND i.name = #name# limit 1
+            </isNotNull>
+        </dynamic>
+    </select>
+
+    <update id="updateSessionValue" parameterClass="Map">
+        update issuer set sessionValue = #sessionValue#
+        where name = #name#
+    </update>
+</sqlMap>

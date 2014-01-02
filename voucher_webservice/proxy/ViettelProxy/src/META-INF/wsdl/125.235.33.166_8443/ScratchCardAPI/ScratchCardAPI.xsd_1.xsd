@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2-hudson-740-. --><xs:schema xmlns:tns="http://api.scratchcard.viettel.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://api.scratchcard.viettel.com/">
+
+<xs:element name="queryCardStatus" type="tns:queryCardStatus" />
+
+<xs:element name="queryCardStatusResponse" type="tns:queryCardStatusResponse" />
+
+<xs:element name="queryResultTransaction" type="tns:queryResultTransaction" />
+
+<xs:element name="queryResultTransactionResponse" type="tns:queryResultTransactionResponse" />
+
+<xs:element name="topupCard" type="tns:topupCard" />
+
+<xs:element name="topupCardResponse" type="tns:topupCardResponse" />
+
+<xs:complexType name="queryResultTransaction">
+<xs:sequence>
+<xs:element name="parnerID" type="xs:string" minOccurs="0" />
+<xs:element name="passphase" type="xs:string" minOccurs="0" />
+<xs:element name="originTransId" type="xs:string" minOccurs="0" />
+<xs:element name="transId" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="queryResultTransactionResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:pnResponse" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="pnResponse">
+<xs:sequence>
+<xs:element name="amount" type="xs:string" minOccurs="0" />
+<xs:element name="cardSerial" type="xs:string" minOccurs="0" />
+<xs:element name="errorCode" type="xs:string" minOccurs="0" />
+<xs:element name="errorMessage" type="xs:string" minOccurs="0" />
+<xs:element name="originTransId" type="xs:string" minOccurs="0" />
+<xs:element name="responseTime" type="xs:dateTime" minOccurs="0" />
+<xs:element name="transId" type="xs:string" minOccurs="0" />
+<xs:element name="transInfo" type="tns:pnResponse" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="queryCardStatus">
+<xs:sequence>
+<xs:element name="sequence" type="xs:string" minOccurs="0" />
+<xs:element name="partnerID" type="xs:string" minOccurs="0" />
+<xs:element name="passphase" type="xs:string" minOccurs="0" />
+<xs:element name="transId" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="queryCardStatusResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:pnResponse" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="topupCard">
+<xs:sequence>
+<xs:element name="parnerID" type="xs:string" minOccurs="0" />
+<xs:element name="passphase" type="xs:string" minOccurs="0" />
+<xs:element name="cardSerial" type="xs:string" minOccurs="0" />
+<xs:element name="pinCard" type="xs:string" minOccurs="0" />
+<xs:element name="transId" type="xs:string" minOccurs="0" />
+<xs:element name="provider" type="xs:string" minOccurs="0" />
+<xs:element name="serviceName" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="topupCardResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:pnResponse" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

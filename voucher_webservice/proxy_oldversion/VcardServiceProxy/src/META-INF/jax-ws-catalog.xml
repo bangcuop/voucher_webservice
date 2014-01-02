@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:8084/WebServiceVcard/WebServiceVcard?wsdl" uri="wsdl/localhost_8084/WebServiceVcard/WebServiceVcard.wsdl"/>
+    <system systemId="http://localhost:8084/WebServiceVcard/WebServiceVcard?xsd=1" uri="wsdl/localhost_8084/WebServiceVcard/WebServiceVcard.xsd_1.xsd"/>
+    <system systemId="http://localhost:8084/WebServiceVcard/WebServiceVcard?xsd=2" uri="wsdl/localhost_8084/WebServiceVcard/WebServiceVcard.xsd_2.xsd"/>
+    <system systemId="http://10.26.5.110:8480/WebServiceVcard/WebServiceVcard?wsdl" uri="wsdl/10.26.5.110_8480/WebServiceVcard/WebServiceVcard.wsdl"/>
+    <system systemId="http://10.26.5.110:8480/WebServiceVcard/WebServiceVcard?xsd=1" uri="wsdl/10.26.5.110_8480/WebServiceVcard/WebServiceVcard.xsd_1.xsd"/>
+    <system systemId="http://10.26.5.110:8480/WebServiceVcard/WebServiceVcard?xsd=2" uri="wsdl/10.26.5.110_8480/WebServiceVcard/WebServiceVcard.xsd_2.xsd"/>
+    <system systemId="http://localhost:8380/WebServiceVcard/WebServiceVcard?wsdl" uri="wsdl/localhost_8380/WebServiceVcard/WebServiceVcard.wsdl"/>
+    <system systemId="http://localhost:8380/WebServiceVcard/WebServiceVcard?xsd=1" uri="wsdl/localhost_8380/WebServiceVcard/WebServiceVcard.xsd_1.xsd"/>
+    <system systemId="http://localhost:8380/WebServiceVcard/WebServiceVcard?xsd=2" uri="wsdl/localhost_8380/WebServiceVcard/WebServiceVcard.xsd_2.xsd"/>
+    <system systemId="http://10.26.6.7:8480/WebServiceVcard/WebServiceVcard?wsdl" uri="wsdl/10.26.6.7_8480/WebServiceVcard/WebServiceVcard.wsdl"/>
+    <system systemId="http://10.26.6.7:8480/WebServiceVcard/WebServiceVcard?xsd=1" uri="wsdl/10.26.6.7_8480/WebServiceVcard/WebServiceVcard.xsd_1.xsd"/>
+    <system systemId="http://10.26.6.7:8480/WebServiceVcard/WebServiceVcard?xsd=2" uri="wsdl/10.26.6.7_8480/WebServiceVcard/WebServiceVcard.xsd_2.xsd"/>
+</catalog>
