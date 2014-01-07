@@ -6,11 +6,7 @@ package com.vss.cardservice.service.util;
 
 import com.vss.cardservice.api.ITransactionService;
 import com.vss.cardservice.dto.Transaction;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.util.Date;
-import java.util.Enumeration;
+import java.util.List;
 
 /**
  *
@@ -19,65 +15,44 @@ import java.util.Enumeration;
 public class TransactionServiceUtil {
 
     private static ITransactionService transactionService;
-    private static String serverIp;
 
-    public static Boolean updateTransaction(Transaction transaction) {
-        return transactionService.updateTransaction(transaction);
+    public static String getStatus(String responseStatus) {
+        if (responseStatus == null
+                || responseStatus.equals(WebParameter.CONNECTION_TIMEOUT)
+                || responseStatus.equals(WebParameter.GIAO_DICH_NGHI_VAN)
+                || responseStatus.equals(WebParameter.LOI_GOI_HAM_PROVIDER)
+                || responseStatus.equals(WebParameter.LOI_KET_NOI_PROVIDER)
+                || responseStatus.equals(WebParameter.LOI_KHONG_XAC_DINH)) {
+            return ITransactionService.UNIDENTIFIED_RESULT;
+        } else {
+            return ITransactionService.CLEAR_RESULT;
+        }
     }
 
-    public static Transaction createTransaction(Integer partnerId, String partnerCode, String cardCode, String cardSerial, String issuer, String ip, String transRef) throws Exception {
-        Transaction tran = new Transaction();
-        tran.setPartnerId(partnerId);
-        tran.setPartnerCode(partnerCode);
-        tran.setCardCode(cardCode);
-        tran.setCardSerial(cardSerial);
-        tran.setRequestTime(new Date());
-        tran.setIssuer(issuer);
-        tran.setTransRefId(transRef);
-        tran.setRequestIp(ip);
-        tran.setServerIp(getServerIp());
-//        if (tran.getIssuer().equalsIgnoreCase("MOBI")) {
-//            tran.setGameService(IssuerServiceUtil.getRandomGameService(partnerId));
-//        }
-        Long transactionId = transactionService.createTransaction(tran);
-        tran.setTransactionId(transactionId.intValue());
-        return tran;
+    public static void updateTransaction(Transaction transaction, boolean callBackend) throws Exception {
+        transactionService.updateTransaction(transaction, callBackend);
+    }
+
+    public static Transaction insertTransaction(Transaction transaction) throws Exception {
+        Long transactionId = transactionService.insertTransaction(transaction);
+        transaction.setTransactionId(transactionId.intValue());
+        return transaction;
+    }
+
+    public static Transaction loadTransaction(Integer transactionId) throws Exception {
+        return transactionService.loadTransaction(transactionId);
     }
 
     public static Transaction getTransactionDetail(Integer partnerId, String transRef) {
         return transactionService.getTransactionDetail(partnerId, transRef);
     }
 
-    public static String getServerIp() {
-        if (serverIp == null) {
-            Enumeration<NetworkInterface> networkInterfaces = null;
-            try {
-                networkInterfaces = NetworkInterface.getNetworkInterfaces();
-                while (networkInterfaces.hasMoreElements()) {
-                    NetworkInterface ni = (NetworkInterface) networkInterfaces.nextElement();
-                    Enumeration<InetAddress> ipEnum = ni.getInetAddresses();
-                    while (ipEnum.hasMoreElements()) {
-                        String ip = ipEnum.nextElement().getHostAddress();
-                        System.out.println("Server IP :" + ip);
-                        if (ip.contains(".") && !ip.startsWith("127")) {
-                            serverIp = ip;
-                        }
-//                        if (ip.getHostAddress().startsWith("202.160.125.")) {
-//                            serverIp = ip.getHostAddress().replaceFirst("202.160.125.", "");
-//                            break;
-//                        }
-//                        if (ip.getHostAddress().startsWith("10.26.")) {
-//                            serverIp = ip.getHostAddress().replaceFirst("10.26.", "");
-//                            break;
-//                        }
-                    }
-                }
+    public static void checkExistTransaction(Transaction transaction) throws Exception {
+        transactionService.checkExistTransaction(transaction);
+    }
 
-            } catch (SocketException e) {
-                e.printStackTrace();
-            }
-        }
-        return serverIp;
+    public static List<Transaction> getTransactionListForCheckTran() throws Exception {
+        return transactionService.getTransactionListForCheckTran();
     }
 
     ///////

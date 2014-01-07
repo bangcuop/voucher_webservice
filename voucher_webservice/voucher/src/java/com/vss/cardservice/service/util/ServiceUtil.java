@@ -1,28 +1,30 @@
 package com.vss.cardservice.service.util;
 
-import com.vss.cardservice.api.IGameAccountService;
 import com.vss.cardservice.dto.Partner;
 import com.vss.cardservice.dto.PartnerInfo;
 import com.vss.cardservice.dto.Transaction;
 import com.vss.cardservice.service.exception.CardServiceDBException;
-import com.vss.message.util.LoggingUtil;
+import com.vss.cardservice.webservice.VoucherServiceUtil;
 import java.security.MessageDigest;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import org.apache.log4j.Logger;
 
 public class ServiceUtil {
 
+    private static final Logger logger = Logger.getLogger("ServiceUtil");
     public static Map<String, Partner> partnerCollection = new HashMap<String, Partner>();
     public static Map<Integer, Partner> providerCollection = new HashMap<Integer, Partner>();
     public static Map<String, Integer> issuerMap;
-    public static Map<String, Transaction> transactionQueue = new HashMap<String, Transaction>();
+    public static Map<Integer, Transaction> transactionQueue = new HashMap<Integer, Transaction>();
     public static int lockDuration = Integer.parseInt(getString("lockDuration"));
     public static Long session_timeout = null;
-    public static boolean lockPartnerPermission = false;
     public static int maxFail = 10;
     private static final SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyy HH:mm:ss");
+    public static DateFormat formaterSQL = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private static ResourceBundle bundle;
-    public static final String serverIp = "[" + TransactionServiceUtil.getServerIp() + "]";
+    public static final String serverIp = "[" + VoucherServiceUtil.getServerIp() + "]";
     public static final String disconnectSubject = serverIp + MailServiceUtil.getString("disconnectSubject");
     public static final String reconnectSubject = serverIp + MailServiceUtil.getString("reconnectSubject");
     public static final String disconnectContent = serverIp + MailServiceUtil.getString("disconnectContent");
@@ -31,10 +33,10 @@ public class ServiceUtil {
     public static final String smsReconnect = serverIp + MailServiceUtil.getString("smsReconnect");
     public static final String mailSubject = serverIp + MailServiceUtil.getString("mail_alert_subject");
     public static final String smsContent = serverIp + MailServiceUtil.getString("smsContent");
+    public static final String DELIMITER_APPEND = "|";
 
     static {
         try {
-            lockPartnerPermission = getString("lockPartnerPermission").equals("true");
             maxFail = Integer.parseInt(getBundle().getString("maxFail"));
         } catch (Exception e) {
             e.printStackTrace();
@@ -54,26 +56,19 @@ public class ServiceUtil {
         return cardId;
     }
 
-    public static String getCurrentDate() {
-        return df.format(new Date());
-    }
-
     public static void checkLockPartner(PartnerInfo partnerInfo) {
-        if (!lockPartnerPermission) {
-            return;
-        }
         try {
-            Partner p = partnerCollection.get(partnerInfo.getPartnerCode());
+            Partner p = ServiceUtil.partnerCollection.get(partnerInfo.getPartnerCode());
             if (p != null) {
                 if (p.getFailedCount() >= maxFail) {
                     p.setIsLock("1");
                     Calendar cal = Calendar.getInstance();
                     cal.add(Calendar.MILLISECOND, lockDuration);
                     p.setUnlockTime(cal.getTimeInMillis());
-                    LoggingUtil.log("[WARN] LOCK partner " + p.getPartnerCode() + " : " + df.format(new Date()) + " - " + df.format(cal.getTime()), "useCard_transaction");
+                    logger.warn("Bat dau tam khoa partner " + p.getPartnerCode() + " : " + df.format(new Date()) + " - " + df.format(cal.getTime()));
                 } else {
                     p.setFailedCount(p.getFailedCount() + 1);
-                    LoggingUtil.log("[WARN] failed count partner " + p.getPartnerCode() + "==" + p.getFailedCount() + " " + df.format(new Date()), "useCard_transaction");
+                    logger.warn(df.format(new Date()) + " : " + p.getPartnerCode() + " da gach sai " + p.getFailedCount() + " lan");
                 }
             }
         } catch (Exception e) {
@@ -84,17 +79,25 @@ public class ServiceUtil {
     public static String getResponseToPartner(Transaction tran, boolean getTransactionDetail) {
         String responseStatus = tran.getResponseStatus();
         String responseDescription = tran.getResponseDescription();
+        StringBuilder sb = new StringBuilder(100);
         if (!getTransactionDetail) {
-            if (responseStatus != null && responseStatus.equals(WebParameter.GIAO_DICH_THANH_CONG.split("\\|")[0])) {
-                return responseStatus + "|" + responseDescription + "|" + tran.getAmount();
-            } else {
-                return responseStatus + "|" + responseDescription;
+            sb.append(responseStatus);
+            sb.append(DELIMITER_APPEND);
+            sb.append(responseDescription);
+            if (responseStatus != null && responseStatus.equals(WebParameter.GIAO_DICH_THANH_CONG)) {
+                sb.append(DELIMITER_APPEND);
+                sb.append(tran.getAmount());
             }
+            return sb.toString();
         } else {
-            return (responseStatus == null ? WebParameter.LOI_KHONG_XAC_DINH : responseStatus) + "|"
-                    + (tran.getTransRefId() == null ? "" : tran.getTransRefId()) + "|"
-                    + (tran.getCardCode() == null ? "" : tran.getCardCode()) + "|"
-                    + (tran.getAmount() == null ? "0" : tran.getAmount());
+            sb.append(responseStatus == null ? WebParameter.LOI_KHONG_XAC_DINH : responseStatus);
+            sb.append(DELIMITER_APPEND);
+            sb.append(tran.getTransRefId());
+            sb.append(DELIMITER_APPEND);
+            sb.append(tran.getCardCode());
+            sb.append(DELIMITER_APPEND);
+            sb.append(tran.getAmount());
+            return sb.toString();
         }
     }
 
@@ -153,4 +156,15 @@ public class ServiceUtil {
         }
         return buf.toString();
     }
+
+//    public static String getRequestTimeFromSQL() {
+//        try {
+//            Calendar cal = Calendar.getInstance();
+//            cal.add(Calendar.DAY_OF_MONTH, -Integer.parseInt(ConfigServiceUtil.getValueFromKey("checkTransaction")));
+//            return formaterSQL.format(cal.getTime());
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//            return formaterSQL.format(new Date());
+//        }
+//    }
 }

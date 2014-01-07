@@ -4,14 +4,17 @@ import com.vss.cardservice.api.ITransactionService;
 import com.vss.cardservice.dto.Transaction;
 import com.vss.cardservice.service.exception.CardServiceDBException;
 import com.vss.cardservice.service.exception.DuplicatedRequestRefException;
+import com.vss.cardservice.service.exception.ErrorUtil;
 import com.vss.cardservice.service.exception.InvalidCardCodeException;
 import com.vss.cardservice.service.util.BaseService;
 import com.vss.cardservice.service.util.ServiceUtil;
-import com.vss.cardservice.service.util.WebParameter;
+import com.vss.cardservice.service.util.TransactionServiceUtil;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import org.apache.log4j.Logger;
+import vcard.service.proxy.VcardServiceProxy;
 
 /**
  *
@@ -22,21 +25,21 @@ import java.util.Map;
 public class TransactionServiceImpl extends BaseService implements ITransactionService {
 
     private SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static final Logger logger = Logger.getLogger("TransactionService");
 //    private IProviderService providerService;
 
-    public Long createTransaction(Transaction tran) throws Exception {
-        checkTransaction(tran);
-        tran.setCardId(String.valueOf(ServiceUtil.getCardId(tran.getIssuer(), "0")));
+    public Long insertTransaction(Transaction tran) throws Exception {
         return (Long) mysqlMap.insert("transaction.createTransaction", tran);
     }
 
-    private void checkTransaction(Transaction transaction) {
+    public void checkExistTransaction(Transaction transaction) throws Exception {
         Map map = new HashMap();
         map.put("cardCode", transaction.getCardCode());
         map.put("cardSerial", transaction.getCardSerial());
         map.put("issuerId", ServiceUtil.issuerMap.get(transaction.getIssuer()));
         map.put("partnerId", transaction.getPartnerId());
         map.put("transRefId", transaction.getTransRefId());
+        map.put("clearResultStatus", CLEAR_RESULT);
         Transaction tran;
         try {
             tran = (Transaction) mysqlMap.queryForObject("transaction.getStatusByCardCode", map);
@@ -44,33 +47,27 @@ public class TransactionServiceImpl extends BaseService implements ITransactionS
             ex.printStackTrace();
             return;
         }
-
         if (tran != null) {
             if (tran.getPartnerId().equals(transaction.getPartnerId()) && tran.getTransRefId().equalsIgnoreCase(transaction.getTransRefId())) {
-                throw new DuplicatedRequestRefException("[Trung ma giao dich]");
+                throw new DuplicatedRequestRefException();
             } else {
-                throw new InvalidCardCodeException("[Ma the da duoc su dung]");
+                throw new InvalidCardCodeException();
             }
         }
     }
 
-    private String getStatus(String responseStatus) {
-        if (responseStatus == null
-                || responseStatus.equals(WebParameter.CONNECTION_TIMEOUT)
-                || responseStatus.equals(WebParameter.GIAO_DICH_NGHI_VAN)
-                || responseStatus.equals(WebParameter.LOI_GOI_HAM_PROVIDER)
-                || responseStatus.equals(WebParameter.LOI_KET_NOI_PROVIDER)
-                || responseStatus.equals(WebParameter.LOI_KHONG_XAC_DINH)
-                || responseStatus.equals(WebParameter.CONNECTION_TIMEOUT)
-                || responseStatus.equals(WebParameter.CONNECTION_TIMEOUT)) {
-            return UNIDENTIFIED_RESULT;
+    public void updateTransaction(Transaction tran, boolean callBackend) throws Exception {
+        if (callBackend) {
+            logger.info("Update transaction via WebServiceVcard : transactionId = " + tran.getTransactionId());
+            com.vss.vcard.dto.Transaction newTrans = new com.vss.vcard.dto.Transaction();
+            newTrans.setTransactionId(tran.getTransactionId());
+            newTrans.setIssuerId(tran.getIssuerId());
+            newTrans.setPar(Integer.parseInt(tran.getAmount()));
+            newTrans.setCheckCardResponse(tran.getCheckCardResponse().length() > 99 ? tran.getCheckCardResponse().substring(0, 99) : tran.getCheckCardResponse());
+            newTrans.setResponseStatus(tran.getResponseStatus());
+            newTrans.setResponseDescription(ErrorUtil.descriptionMap.get(tran.getResponseStatus()));
+            VcardServiceProxy.updateTransaction(newTrans);
         } else {
-            return CLEAR_RESULT;
-        }
-    }
-
-    public Boolean updateTransaction(Transaction tran) {
-        try {
             Integer cardId = null;
             String amount = tran.getAmount();
             if (amount != null) {
@@ -81,10 +78,10 @@ public class TransactionServiceImpl extends BaseService implements ITransactionS
                 }
             }
             StringBuilder sb = new StringBuilder("UPDATE transaction SET status = ");
-            sb.append(getStatus(tran.getResponseStatus()));
+            sb.append(TransactionServiceUtil.getStatus(tran.getResponseStatus()));
             if (tran.getResponseTime() != null) {
                 sb.append(",responseTime = '");
-                sb.append(df.format(new Date()));
+                sb.append(df.format(tran.getResponseTime()));
                 sb.append("'");
             }
             if (tran.getResponseStatus() != null) {
@@ -121,17 +118,16 @@ public class TransactionServiceImpl extends BaseService implements ITransactionS
                 sb.append(tran.getAccountId());
                 sb.append("'");
             }
-            if (tran.getProviderId() != null && tran.getProviderId() > 0) {
+            if (tran.getProviderId() != null) {
                 sb.append(",providerId=");
                 sb.append(tran.getProviderId());
             }
             sb.append(" WHERE transactionId =");
             sb.append(tran.getTransactionId());
-            int count = mysqlMap.update("transaction.updateTransaction", sb.toString());
-            return (count > 0);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new CardServiceDBException(e);
+            if (cardId == null) {
+                sb.append(" AND useCardResponse IS NULL");
+            }
+            mysqlMap.update("transaction.updateTransaction", sb.toString());
         }
     }
 
@@ -141,6 +137,21 @@ public class TransactionServiceImpl extends BaseService implements ITransactionS
             map.put("partnerId", partnerId);
             map.put("transRefId", transRef);
             return (Transaction) mysqlMap.queryForObject("transaction.getTransactionDetail", map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new CardServiceDBException(e);
+        }
+    }
+
+    public Transaction loadTransaction(Integer transactionId) throws Exception {
+        return (Transaction) mysqlMap.queryForObject("transaction.loadTransaction", transactionId);
+    }
+
+    public List<Transaction> getTransactionListForCheckTran() throws Exception {
+        try {
+//            Map map = new HashMap();
+//            map.put("requestTimeFrom", ServiceUtil.getRequestTimeFromSQL());
+            return mysqlMap.queryForList("transaction.getTransactionListForCheckTran");
         } catch (Exception e) {
             e.printStackTrace();
             throw new CardServiceDBException(e);

@@ -7,7 +7,11 @@ package com.vss.cardservice.service.util;
 import com.vss.cardservice.api.IAlertService;
 import com.vss.cardservice.api.IPartnerService;
 import com.vss.cardservice.dto.Partner;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import javax.mail.Message;
@@ -15,6 +19,8 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 /**
  *
@@ -25,64 +31,32 @@ public class MailServiceUtil {
     private static IAlertService alertService;
     private static ResourceBundle bundle;
     private static IPartnerService partnerService;
-    private static List<Partner> listPartner;
 
-    private static ResourceBundle getBundle() {
-        if (bundle == null) { 
-            bundle = ResourceBundle.getBundle("configure");
+    public static void sendAlert(String subject, String mailContent, String smsContent, String phone, boolean sendToPartner) {
+        String alertType = getBundle().getString("alert_type");
+        if (alertType == null || alertType.isEmpty()) {
+            alertType = "0";
         }
-        return bundle;
-    }
-    
-    private static final boolean useService = Boolean.valueOf(getBundle().getString("mail.usespring"));
-
-    public static String getString(String key) {
         try {
-            return getBundle().getString(key);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
-
-    public static List<Partner> getListPartner() {
-        if (listPartner == null) {
-            listPartner = partnerService.getPartnerList();
-        }
-        return listPartner;
-    }
-
-    public void setPartnerService(IPartnerService partnerService) {
-        MailServiceUtil.partnerService = partnerService;
-    }
-
-    public void setAlertService(IAlertService alertService) {
-        MailServiceUtil.alertService = alertService;
-    }
-
-    public static void mailAlertToPartner(String subject, String content) {
-        try {
-            List<Partner> ps = partnerService.getPartnerList();
-            if (ps != null && !ps.isEmpty()) {
-                for (Partner p : ps) {
-                    String emails = p.getMailAddress();
-                    if (emails != null && emails.length() > 0) {
-                        String mailTo = "";
-                        String[] cc = null;
-                        if (emails.indexOf(";") > -1) {
-                            mailTo = emails.split(";")[0];
-                            cc = emails.replaceAll(mailTo + ";", "").split(";");
-                        } else {
-                            mailTo = emails;
-                        }
-                        if (!mailTo.isEmpty() && (cc == null || cc.length == 0)) {
-                            alertService.sendMail(mailTo, subject, content);
-                        }
-                        if (!mailTo.isEmpty() && cc != null && cc.length > 0) {
-                            alertService.sendMail(mailTo, cc, subject, content);
-                        }
+            switch (Integer.valueOf(alertType)) {
+                case 0:
+                    mailAlert(subject, mailContent);
+                    break;
+                case 1:
+                    smsAlert(smsContent, phone);
+                    if (sendToPartner) {
+                        smsAlertToPartner(smsContent);
                     }
-                }
+                    break;
+                case 2:
+                    smsAlert(smsContent, phone);
+                    if (sendToPartner) {
+                        smsAlertToPartner(smsContent);
+                    }
+                    mailAlert(subject, mailContent);
+                    break;
+                default:
+                    mailAlert(subject, mailContent);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -121,7 +95,7 @@ public class MailServiceUtil {
         }
     }
 
-    public static void smsAlert(String content, String phones) {
+    private static void smsAlert(String content, String phones) {
         try {
             if (phones == null || phones.isEmpty()) {
                 phones = getBundle().getString("alert_phones");
@@ -136,7 +110,7 @@ public class MailServiceUtil {
         }
     }
 
-    public static void smsAlertToPartner(String content) {
+    private static void smsAlertToPartner(String content) {
         try {
             List<Partner> ps = partnerService.getPartnerList();
             if (ps != null && !ps.isEmpty()) {
@@ -161,50 +135,62 @@ public class MailServiceUtil {
         }
     }
 
-    public static void sendAlert(String subject, String mailContent, String smsContent, String phone, boolean sendToPartner) {
-        String alertType = getBundle().getString("alert_type");
-        if (alertType == null || alertType.isEmpty()) {
-            alertType = "0";
+    private static ResourceBundle getBundle() {
+        if (bundle == null) {
+            bundle = ResourceBundle.getBundle("configure");
         }
-        try {
-            switch (Integer.valueOf(alertType)) {
-                case 0:
-                    mailAlert(subject, mailContent);
-                    break;
-                case 1:
-                    smsAlert(smsContent, phone);
-                    if (sendToPartner) {
-                        smsAlertToPartner(smsContent);
-                    }
-                    break;
-                case 2:
-                    smsAlert(smsContent, phone);
-                    if (sendToPartner) {
-                        smsAlertToPartner(smsContent);
-                    }
-                    mailAlert(subject, mailContent);
-                    break;
-                default:
-                    mailAlert(subject, mailContent);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            mailAlert(subject, mailContent);
-        }
+        return bundle;
     }
+    private static final boolean useService = Boolean.valueOf(getBundle().getString("mail.usespring"));
 
-    public static void mailAlertTransaction(String subject, String mailContent) {
-        String alertType = getBundle().getString("alert_type");
-        if (alertType == null || alertType.isEmpty()) {
-            alertType = "0";
-        }
+    public static String getString(String key) {
         try {
-            mailAlert(subject, mailContent);
+            return getBundle().getString(key);
         } catch (Exception e) {
             e.printStackTrace();
-            mailAlert(subject, mailContent);
+            return "";
         }
     }
+//    private static void mailAlertToPartner(String subject, String content) {
+//        try {
+//            List<Partner> ps = partnerService.getPartnerList();
+//            if (ps != null && !ps.isEmpty()) {
+//                for (Partner p : ps) {
+//                    String emails = p.getMailAddress();
+//                    if (emails != null && emails.length() > 0) {
+//                        String mailTo = "";
+//                        String[] cc = null;
+//                        if (emails.indexOf(";") > -1) {
+//                            mailTo = emails.split(";")[0];
+//                            cc = emails.replaceAll(mailTo + ";", "").split(";");
+//                        } else {
+//                            mailTo = emails;
+//                        }
+//                        if (!mailTo.isEmpty() && (cc == null || cc.length == 0)) {
+//                            alertService.sendMail(mailTo, subject, content);
+//                        }
+//                        if (!mailTo.isEmpty() && cc != null && cc.length > 0) {
+//                            alertService.sendMail(mailTo, cc, subject, content);
+//                        }
+//                    }
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+//    public static void mailAlertTransaction(String subject, String mailContent) {
+//        String alertType = getBundle().getString("alert_type");
+//        if (alertType == null || alertType.isEmpty()) {
+//            alertType = "0";
+//        }
+//        try {
+//            mailAlert(subject, mailContent);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            mailAlert(subject, mailContent);
+//        }
+//    }
     static final String from = bundle.getString("smtp.gmail.from");
     static final String password = bundle.getString("smtp.gmail.pwd");
     static final String to = bundle.getString("smtp.gmail.to");
@@ -214,7 +200,7 @@ public class MailServiceUtil {
     static final String host = bundle.getString("mail.smtps.host");
 //    static final String 
 
-    public static void sendByCode(String subject, String content, String maillTo) {
+    private static void sendByCode(String subject, String content, String maillTo) {
         try {
 //            final String SMTP_HOST_NAME = "smtp.gmail.com";
 //            final int SMTP_HOST_PORT = 465;
@@ -247,7 +233,39 @@ public class MailServiceUtil {
         }
     }
 
-    public static void main(String[] args) {
-//        sendByCode("", "", "kt@ahha.vn");
+    public void setPartnerService(IPartnerService partnerService) {
+        MailServiceUtil.partnerService = partnerService;
     }
-}
+
+    public void setAlertService(IAlertService alertService) {
+        MailServiceUtil.alertService = alertService;
+    }
+
+    private static void testSendMail() {
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        mailSender.setHost("202.160.124.39");
+//        mailSender.setHost("10.25.1.21");
+        mailSender.setPort(25);
+//        mailSender.setUsername("vanhanh@paydirect.vn");
+//        mailSender.setPassword("vnds1234");
+        mailSender.setUsername("ipa/vanhanh");
+        mailSender.setPassword("homedirect@1234");
+        mailSender.setDefaultEncoding("UTF-8");
+        Properties props = new Properties();
+        props.setProperty("mail.smtp.auth", "true");
+        props.setProperty("mail.smtp.starttls.enable", "false");
+        mailSender.setJavaMailProperties(props);
+
+        SimpleMailMessage msg = new SimpleMailMessage();
+//        msg.setFrom("vanhanh@paydirect.vn");
+        msg.setFrom("ipa/vanhanh");
+        msg.setTo("thang.tranquyet@homedirect.com.vn");
+        msg.setText("test content");
+        msg.setSubject("test");
+        mailSender.send(msg);
+    }
+    public static void main(String[] args) {
+//        sendByCode("test", "test content", "thang.tranquyet@homedirect.com.vn");
+        testSendMail();
+        }
+    }

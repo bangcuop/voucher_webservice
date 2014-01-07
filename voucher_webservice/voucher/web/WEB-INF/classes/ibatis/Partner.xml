@@ -63,11 +63,13 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
     </update>
 
     <select id="getProcessPartner" resultClass="partnerDto" parameterClass="Integer">
-        SELECT p.partnerId, p.partnerCode, jarName, className, ip.currentSalesPercent - ip.applySalesPercent as percent 
-        FROM issuer_partner ip 
-        INNER JOIN partner p ON ip.partnerId = p.partnerId
-        WHERE ip.issuerId = $issuerId$ AND NOT ip.isLock AND applySalesPercent > 0 AND (applySalesLimit IS NULL OR applySalesLimit*1E6 > currentSales) 
-        ORDER BY percent ASC LIMIT 1
+        call sp_getProcessPartner($issuerId$)
+    </select>
+    
+    <select id="loadPartnerById" resultClass="partnerDto" parameterClass="Integer">
+        SELECT p.partnerId, p.isProvider, p.partnerCode, jarName, className
+        FROM partner p 
+        WHERE partnerId = $partnerId$
     </select>
     
     <select id="checkLockIssuerPartner" resultClass="Integer" parameterClass="Map">

@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:ehcache="http://www.springmodules.org/schema/ehcache"
-       xmlns:context="http://www.springframework.org/schema/context" xmlns:jee="http://www.springframework.org/schema/jee"
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p" 
+       xmlns:context="http://www.springframework.org/schema/context" 
+       xmlns:jee="http://www.springframework.org/schema/jee"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="
-       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
-       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
-       http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring
-       http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.1.xsd">
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 
     <bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
@@ -60,10 +58,13 @@
     <!-- Mail Service -->
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="defaultEncoding" value="UTF-8"/>
-        <property name="host" value="202.160.124.39" />
+<!--        <property name="host" value="202.160.124.39" />-->
+        <property name="host" value="10.25.1.21" />
         <property name="port" value="25"/>
-        <property name="username" value="vanhanh@paydirect.vn"/>
-        <property name="password" value="vnds1234"/>
+<!--        <property name="username" value="vanhanh@paydirect.vn"/>
+        <property name="password" value="vnds1234"/>-->
+        <property name="username" value="ipa/vanhanh"/>
+        <property name="password" value="homedirect@1234"/>
         <property name="javaMailProperties">
             <props>
                 <prop key="mail.smtp.auth">true</prop>
@@ -99,6 +100,10 @@
     <bean id="partnerServiceUtil" class="com.vss.cardservice.service.util.PartnerServiceUtil">
         <property name="partnerService" ref="partnerService"/>
     </bean>
+    <bean id="configService" class="com.vss.cardservice.service.impl.ConfigServiceImpl" parent="baseService"/>
+    <bean id="configServiceUtil" class="com.vss.cardservice.service.util.ConfigServiceUtil">
+        <property name="configService" ref="configService"/>
+    </bean>
     <bean id="mailServiceUtil" class="com.vss.cardservice.service.util.MailServiceUtil">
         <property name="alertService" ref="com.vss.cardservice.service.impl.AlertMessageImpl"/>
         <property name="partnerService" ref="partnerService"/>
@@ -116,133 +121,12 @@
     </bean>
     
     <bean id="gameAccountService" class="com.vss.cardservice.service.impl.GameAccountServiceImpl" parent="baseService"/>
-<!--    <bean id="providerService" class="com.vss.cardservice.service.impl.ProviderServiceImpl" parent="baseService"/>-->
-    
-    <bean id="cardServiceLocalServiceUtil" class="com.vss.cardservice.service.util.CardServiceLocalServiceUtil">
-        <property name="transactionService" ref="transactionService"/>
-        <property name="gameAccountService" ref="gameAccountService"/>
-        <property name="issuerService" ref="issuerService"/>
-    </bean>
     
     <bean id="jobUtil" class="com.vss.cardservice.service.util.JobUtil">
         <property name="partnerService" ref="partnerService"/>
         <property name="issuerService" ref="issuerService"/>
         <property name="gameAccountService" ref="gameAccountService"/>
     </bean>
-    
-<!--    <bean id="cardServiceLocalFactory" class="com.vss.cardservice.service.util.CardServiceLocalFactory">
-        <property name="mapService">
-            <map>
-                 Telco 
-                <entry key="MOBI" value-ref="mobileCardService"/> 
-                 <entry key="VINA" value-ref="vinaCardService"/> 
-                 <entry key="VT" value-ref="viettelCardService"/> 
-
-                 EBS 
-                <entry key="VINA" value-ref="ebpService"/>
-                <entry key="MOBI" value-ref="ebpService"/>
-                 <entry key="VT" value-ref="ebpService"/> 
-
-                 VDC 
-                 <entry key="VINA" value-ref="vdcService"/> 
-                 <entry key="MOBI" value-ref="vdcService"/> 
-                 <entry key="VT" value-ref="vdcService"/> 
-
-                 VTC 
-                 <entry key="MOBI" value-ref="vtcServiceImpl"/> 
-                 <entry key="VINA" value-ref="vtcServiceImpl"/> 
-                 <entry key="VT" value-ref="vtcServiceImpl"/>
-                 <entry key="VCOIN" value-ref="vtcServiceImpl"/> 
-                 <entry key="BAC" value-ref="vtcServiceImpl"/>
-
-                 Orther 
-                 <entry key="KM" value-ref="promotionService"/>
-                 <entry key="VCOIN" value-ref="fgameService"/> 
-                 <entry key="BAC" value-ref="fgameService"/>
-                 <entry key="EPAY" value-ref="vnptEpayService"/>
-
-                 voucher service 
-                <entry key="VT" value-ref="cardServiceImpl"/>
-                
-            </map>
-        </property>
-    </bean>-->
-<!--    <bean id="viettelCardService" class="com.vss.cardservice.service.impl.ViettelCardServiceImpl"/>
-    <bean id="vnptEpayService" class="com.vss.cardservice.service.impl.VNPTEPAYServiceImpl"/>
-    <bean id="mobileCardService" class="com.vss.cardservice.service.impl.MobiCardServiceImpl"/>
-    <bean id="vinaCardService" class="com.vss.cardservice.service.impl.VinaCardServiceImpl"/>
-    <bean id="fgameService" class="com.vss.cardservice.service.impl.FGameServiceImpl"/>
-    <bean id="vdcService" class="com.vss.cardservice.service.impl.VDCServiceImpl"/>
-    <bean id="ebpService" class="com.vss.cardservice.service.impl.EBPServiceImpl"/>
-    <bean id="promotionService" class="com.vss.cardservice.service.impl.PromotionServiceImpl"/>
-    <bean id="vtcService" class="com.vss.cardservice.service.impl.VTCServiceImpl"/>
-    
-    <bean id="cardServiceImpl" class="com.vss.cardservice.service.impl.CardServiceImpl">
-        <property name="mapService">
-            <map>
-                <entry key="VCOIN" value-ref="vtcService"/>
-                <entry key="BAC" value-ref="vtcService"/>
-            </map>
-        </property>
-    </bean>-->
-
-<!--    <bean id="voucherServiceUtil" class="com.vss.cardservice.webservice.VoucherServiceUtil">
-        <property name="partnerService" ref="partnerService"/>
-        <property name="issuerService" ref="issuerService"/>
-        <property name="transactionService" ref="transactionService"/>
-    </bean>-->
-    
-<!--    <bean id="transactionProcess" class="com.vss.cardservice.service.util.TransactionProcess">
-        <property name="transactionService" ref="transactionService"/>
-        <property name="cardServiceLocalFactory" ref="cardServiceLocalFactory"/>
-    </bean>
-
-    <bean id="threadManager" class="com.vss.cardservice.service.util.ThreadManager">
-        <property name="transactionProcess" ref="transactionProcess"/>
-    </bean>-->
-
-    <!--0 0/5 * * * ? : 5 phut 1 lan-->
-    <!--0 0/5 * * * ? : Cu den phut thu nam thi thuc hien-->
-<!--    <bean id="keepMobiSessionJob" class="com.vss.cardservice.service.job.KeepSessionJob">
-        <property name="cronExpression" value="0 0/1 * * * ?"/>
-    </bean>
-    <bean id="checkMobiWebService" class="com.vss.cardservice.service.job.CheckMobiWebService">
-        <property name="cronExpression" value="0 0/5 * * * ?"/>
-    </bean>
-    <bean id="keepVnptEpaySessionJob" class="com.vss.cardservice.service.job.KeepVnptEpaySessionJob">
-        <property name="cronExpression" value="0 0 0/10 * * ?"/>
-    </bean>
-    <bean id="checkVnptEpayWebService" class="com.vss.cardservice.service.job.CheckVnptEpayWebService">
-        <property name="cronExpression" value="0 5 * * * ?"/>
-    </bean>
-
-    <bean id="checkVinaWebService" class="com.vss.cardservice.service.job.CheckVinaWebService">
-        <property name="cronExpression" value="0 0/5 * * * ?"/>
-    </bean>
-
-    <bean id="checkViettelWebService" class="com.vss.cardservice.service.job.CheckViettelWebService">
-        <property name="cronExpression" value="0 0/5 * * * ?"/>
-    </bean>
-
-    <bean id="checkCardServiceWebService" class="com.vss.cardservice.service.job.CheckCardServiceWebService">
-        <property name="cronExpression" value="0 0/5 * * * ?"/>
-    </bean>
-
-    <bean id="checkFGameWebService" class="com.vss.cardservice.service.job.CheckFGameWebService">
-        <property name="cronExpression" value="0 0/5 * * * ?"/>
-    </bean>
-
-    <bean id="checkVDCWebService" class="com.vss.cardservice.service.job.CheckVDCWebService">
-        <property name="cronExpression" value="0 0/5 * * * ?"/>
-    </bean>
-
-    <bean id="viettelUpdateTransactionJob" class="com.vss.cardservice.service.job.ViettelUpdateTransactionJob">
-        <property name="cronExpression" value="0 0 3 * * ?"/>
-    </bean>
-
-    <bean id="updateTransactionFailedJob" class="com.vss.cardservice.service.job.UpdateTransactionFailedJob">
-        <property name="cronExpression" value="0 0/5 * * * ?"/>
-    </bean>-->
 
     <bean id="checkProviderConnectionJob" class="com.vss.cardservice.service.job.CheckProviderConnectionJob">
         <property name="cronExpression" value="0 0/1 * * * ?"/>
@@ -251,7 +135,10 @@
         <property name="cronExpression" value="0 0/10 * * * ?"/>
     </bean>
     <bean id="keepProviderSessionJob" class="com.vss.cardservice.service.job.KeepProviderSessionJob">
-        <property name="cronExpression" value="0 1/5 * * * ?"/>
+        <property name="cronExpression" value="0 1/1 * * * ?"/>
+    </bean>
+    <bean id="checkTransactionJob" class="com.vss.cardservice.service.job.CheckTransactionJob">
+        <property name="cronExpression" value="0 20/30 * * * ?"/>
     </bean>
     
     
@@ -261,20 +148,7 @@
                 <ref bean="checkProviderConnectionJob"/>
                 <ref bean="refreshDbCacheJob"/>
                 <ref bean="keepProviderSessionJob"/>
-                
-<!--                <ref bean="keepMobiSessionJob"/>
-                <ref bean="viettelUpdateTransactionJob"/>
-                <ref bean="updateTransactionFailedJob"/>
-
-                <ref bean="checkMobiWebService"/>
-                <ref bean="checkVinaWebService"/>
-                <ref bean="checkViettelWebService"/>
-                
-                <ref bean="checkCardServiceWebService"/>
-                <ref bean="checkFGameWebService"/>
-                <ref bean="checkVnptEpayWebService"/>
-                <ref bean="keepVnptEpaySessionJob"/>
-                <ref bean="checkVDCWebService"/>-->
+                <ref bean="checkTransactionJob"/>
             </list>
         </property>
     </bean>

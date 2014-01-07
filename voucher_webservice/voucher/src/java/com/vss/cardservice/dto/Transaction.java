@@ -23,6 +23,7 @@ public class Transaction {
     private String checkCardResponse;
     private String useCardResponse;
     private String issuer;
+    private Integer issuerId;
     private String responseToPartner;
     private String cardSerial;
     private String telcoTransRefId;
@@ -32,14 +33,31 @@ public class Transaction {
     private String partnerCode;
     private Integer providerId;
     private String serverIp;
-    private String gameService;
+    private String serverCode;
+    private String companyCode;
 
-    public String getGameService() {
-        return gameService;
+    public String getServerCode() {
+        return serverCode;
     }
 
-    public void setGameService(String gameService) {
-        this.gameService = gameService;
+    public void setServerCode(String serverCode) {
+        this.serverCode = serverCode;
+    }
+
+    public String getCompanyCode() {
+        return companyCode;
+    }
+
+    public void setCompanyCode(String companyCode) {
+        this.companyCode = companyCode;
+    }
+
+    public Integer getIssuerId() {
+        return issuerId;
+    }
+
+    public void setIssuerId(Integer issuerId) {
+        this.issuerId = issuerId;
     }
 
     public String getServerIp() {
