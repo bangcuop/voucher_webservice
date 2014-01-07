@@ -7,8 +7,10 @@ package com.vss.cardservice.service.util;
 import com.vss.cardservice.api.IGameAccountService;
 import com.vss.cardservice.api.IIssuerService;
 import com.vss.cardservice.api.IPartnerService;
+import com.vss.cardservice.api.ITransactionService;
 import com.vss.cardservice.dto.Issuer;
 import com.vss.cardservice.dto.Partner;
+import com.vss.cardservice.dto.Transaction;
 import com.vss.cardservice.service.job.CheckProviderConnectionThread;
 import com.vss.cardservice.service.job.KeepProviderSessionThread;
 import java.text.DateFormat;
@@ -19,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -36,10 +39,10 @@ public class JobUtil {
     private static Map<Integer, String> lostConnectionTimeMap = new HashMap();
     private static final DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     private static boolean sendToPartner = ServiceUtil.getString("sendToPartner").equalsIgnoreCase("true");
+    private static Logger logger = Logger.getLogger("JobUtil");
 
     public static void checkProviderConnection() throws Exception {
         checkConnectionPool = Executors.newCachedThreadPool();
-        System.out.println(df.format(new Date()) + " : CheckProviderConnectionJob");
         providerConnectionMap.clear();
 
         List<Partner> partnerList = partnerService.getPartnerList(null, true, null, false);
@@ -48,7 +51,7 @@ public class JobUtil {
         for (int i = 0; i < partnerList.size(); i++) {
             checkConnectionPool.execute(new CheckProviderConnectionThread(partnerList.get(i)));
         }
-        Thread.sleep(15000);
+        Thread.sleep(30000);
         String lostConnectionTime;
         boolean wasConnected;
         for (int i = 0; i < partnerList.size(); i++) {
@@ -60,7 +63,9 @@ public class JobUtil {
             }
             lostConnectionTime = lostConnectionTimeMap.get(partner.getPartnerId());
             wasConnected = lostConnectionTime == null;
-            System.out.println(partnerCode + " : OLD = " + (wasConnected) + " _ NEW = " + checkConnectionResult);
+            if (!checkConnectionResult.equals(wasConnected)) {
+                System.out.println(df.format(new Date()) + " : CheckProviderConnectionJob : " + partnerCode + " : OLD = " + (wasConnected) + " _ NEW = " + checkConnectionResult);
+            }
             if (!checkConnectionResult) {
                 if (wasConnected) {
                     lostConnectionTimeMap.put(partner.getPartnerId(), df.format(new Date()));
@@ -84,11 +89,68 @@ public class JobUtil {
         checkConnectionPool.shutdownNow();
     }
 
+    public static void checkTransaction() throws Exception {
+        /*
+         * Lay danh sach transaction tuong ung voi nha cung cap co the goi lai
+         * Duyet tung giao dich de goi sang tung nha cung cap do Neu giao dich
+         * do thanh cong thi cap nhat lai giao dich do la thanh cong
+         */
+        List<Transaction> listTransactions = null;
+        try {
+            listTransactions = TransactionServiceUtil.getTransactionListForCheckTran();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (listTransactions != null && !listTransactions.isEmpty()) {
+            logger.info("Check Transaction Job : size = " + listTransactions.size());
+            for (Transaction transaction : listTransactions) {
+                try {
+                    StringBuilder sb = createCheckTransactionLog(transaction);
+                    transaction = ClassLoaderUtil.checkTransaction(ServiceUtil.providerCollection.get(transaction.getProviderId()), transaction);
+
+                    sb.append(" : new responseStatus=");
+                    sb.append(transaction.getResponseStatus());
+                    sb.append(" - checkCardResposne=");
+                    sb.append(transaction.getCheckCardResponse());
+                    transaction.setStatus(TransactionServiceUtil.getStatus(transaction.getResponseStatus()));
+                    if (transaction.getStatus().equals(ITransactionService.UNIDENTIFIED_RESULT)) {
+                        sb.append(" - Bo qua");
+                    } else {
+                        TransactionServiceUtil.updateTransaction(transaction, true);
+                        sb.append(" - Cap nhat thanh cong");
+                    }
+                    logger.info(sb.toString());
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private static StringBuilder createCheckTransactionLog(Transaction transaction) {
+        StringBuilder sb = new StringBuilder(100);
+        sb.append("Check card : transId = ");
+        sb.append(transaction.getTransactionId());
+        sb.append(" - provider=");
+        sb.append(transaction.getPartnerCode());
+        sb.append(" - telcoTransRefId=");
+        sb.append(transaction.getTelcoTransRefId());
+        sb.append(" - partnerId=");
+        sb.append(transaction.getPartnerId());
+        sb.append(" - cardCode=");
+        sb.append(transaction.getCardCode());
+        sb.append(" - cardSerial=");
+        sb.append(transaction.getCardSerial());
+        sb.append(" - responseStatus=");
+        sb.append(transaction.getResponseStatus());
+        sb.append(" - useCardResponse=");
+        sb.append(transaction.getUseCardResponse());
+        return sb;
+    }
+
     public static void keepProviderSession() throws Exception {
         keepSessionPool = Executors.newCachedThreadPool();
-        System.out.println(df.format(new Date()) + " : KeepProviderSessionJob");
         providerSessionMap.clear();
-
         List<Partner> partnerList = partnerService.getPartnerList(null, true, true, false);
         Partner partner;
         String keepSessionResult;
@@ -100,12 +162,13 @@ public class JobUtil {
             partner = partnerList.get(i);
             String partnerCode = partner.getPartnerCode();
             keepSessionResult = providerSessionMap.get(partner.getPartnerId());
-            System.out.println(partnerCode + " : OLD = " + partner.getSessionValue() + " _ NEW = " + keepSessionResult);
-            if (keepSessionResult != null) {
-                partnerService.updateSessionValue(partnerCode, keepSessionResult);
-            } else {
-                String content = ServiceUtil.serverIp + "Loi keep session toi nha cung cap " + partnerCode;
+
+            if (keepSessionResult == null) {
+                String content = ServiceUtil.serverIp + " Loi keep session toi nha cung cap " + partnerCode;
                 MailServiceUtil.sendAlert(content, content, content, null, false);
+            } else if (!partner.getSessionValue().equals(keepSessionResult)) {
+                System.out.println(df.format(new Date()) + " : KeepProviderSessionJob : " + partnerCode + " : OLD = " + partner.getSessionValue() + " _ NEW = " + keepSessionResult);
+                partnerService.updateSessionValue(partnerCode, keepSessionResult);
             }
         }
         keepSessionPool.shutdownNow();

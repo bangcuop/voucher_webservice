@@ -13,8 +13,8 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
 <sqlMap namespace="transaction">
     <typeAlias alias="transactionDto" type="com.vss.cardservice.dto.Transaction"/>
     <insert id="createTransaction" parameterClass="transactionDto">
-        INSERT INTO transaction(partnerId, cardCode,transRefId, requestTime,cardId,requestFromIp,status, serverIp)
-        VALUES(#partnerId#, #cardCode#, #transRefId#, #requestTime#,$cardId$,#requestIp#,0, #serverIp#)
+        INSERT INTO transaction(partnerId, cardCode, cardSerial, transRefId, requestTime,cardId,requestFromIp,status, serverIp, providerId)
+        VALUES(#partnerId#, #cardCode#, #cardSerial#, #transRefId#, #requestTime#,$cardId$,#requestIp#,0, #serverIp#, #providerId#)
         <selectKey resultClass="Long">
             select LAST_INSERT_ID() as id
         </selectKey>
@@ -29,9 +29,18 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
         AND t.transrefid = #transRefId#
     </select>
 
+    <select id="loadTransaction" parameterClass="Integer" resultClass="transactionDto">
+        SELECT t.*, i.issuerId, i.name as issuer
+        FROM transaction t
+        INNER JOIN card c ON t.cardId = c.cardId
+        INNER JOIN issuer i ON i.issuerId = c.issuerId 
+        WHERE transactionId = $transactionId$
+    </select>
+        
     <select id="getTransactionDetail" parameterClass="Map" resultClass="transactionDto">
-        SELECT t.responseToPartner
+        SELECT t.transRefId, t.responseStatus, t.cardCode, c.par as amount 
         From transaction t
+        INNER JOIN card c ON t.cardId = c.cardId
         WHERE t.partnerId = #partnerId#
         AND t.transRefId = #transRefId# 
         ORDER BY transactionId DESC LIMIT 1
@@ -48,8 +57,22 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
         INNER JOIN card c on c.cardId = t.cardId
         WHERE 
         (t.partnerId = $partnerId$ AND t.transRefId = #transRefId#)
-        OR (t.cardCode = #cardCode# AND t.cardSerial = BINARY #cardSerial# AND c.issuerId = $issuerId$ AND t.status = '3') 
+        OR (t.cardCode = #cardCode# AND t.cardSerial = BINARY #cardSerial# AND c.issuerId = $issuerId$ AND t.status = #clearResultStatus#) 
         LIMIT 1
+    </select>
+    
+     <select id="getTransactionListForCheckTran" resultClass="transactionDto">
+       SELECT t.transactionId, t.partnerId, t.cardCode, t.cardSerial, t.telcoTransRefId, t.providerId, t.responseStatus, t.useCardResponse,
+            p.partnerCode, 
+            i.issuerId, i.name as issuer,
+            0 as amount
+       FROM transaction t
+       INNER JOIN partner p ON p.partnerId = t.providerId 
+       INNER JOIN card c  ON c.cardId = t.cardId
+       INNER JOIN issuer i ON i.issuerId = c.issuerId
+       WHERE c.par =0 AND p.isCheckTransaction AND t.status in('0','2')
+        AND t.requestTime >= DATE_ADD(now(), INTERVAL -(SELECT value FROM config WHERE `key` = 'checkTransactionPeriod') HOUR) 
+        AND t.telcoTransRefId IS NOT NULL
     </select>
 <!--
     <select id="getListTransactionByDay" parameterClass="Map" resultClass="transactionDto">
@@ -136,7 +159,7 @@ PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
         and substr(responseToPartner,24) REGEXP  <![CDATA[ '^-?[0-9]+$' ]]>
     </select>-->
     
-<!--    <update parameterClass="transactionDto" id="updateCardId">
+    <!--    <update parameterClass="transactionDto" id="updateCardId">
         update transaction 
         set cardId = $cardId$
         where transactionId = $transactionId$

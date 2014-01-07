@@ -52,7 +52,7 @@ public class ValidateUtils {
         }
     }
 
-    public static void validateInput(String issuer, String cardCode, String cardSerial, String transRef) {
+    public static void validateFormat(String issuer, String cardCode, String cardSerial, String transRef) {
         if (issuer == null || issuer.isEmpty()) {
             throw new UnknownIssuerException();
         }
@@ -98,7 +98,7 @@ public class ValidateUtils {
 
     }
 
-    public static void validateCardSerial(String cardSerial, Issuer issuer) {
+    private static void validateCardSerial(String cardSerial, Issuer issuer) {
         if (issuer.getSerialLengthList().isEmpty()) {
             return;
         }

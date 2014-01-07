@@ -105,7 +105,7 @@ public class ErrorUtil {
             response = WebParameter.CONNECTION_TIMEOUT;
         } else if (exception instanceof NumberFormatException) {
             response = WebParameter.THE_KHONG_DUNG_DINH_DANG;
-        } else if (exception instanceof TransRefExistException) {
+        } else if (exception instanceof TransRefNotExistException) {
             response = WebParameter.MA_GIAO_DICH_KHONG_TON_TAI;
         } else if (((exception instanceof ConnectException))
                 || ((exception instanceof InterruptedException))

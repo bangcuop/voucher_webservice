@@ -13,6 +13,8 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.Map;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -20,7 +22,10 @@ import java.net.URLClassLoader;
  */
 public class ClassLoaderUtil {
 
+    private static Logger logger = Logger.getLogger("ClassLoaderUtil");
     public static final String USE_CARD_METHOD = "useCard";
+    public static final String CHECK_TRANSACTION_METHOD = "checkTransaction";
+    public static final String UPDATE_TRANSACITON_METHOD = "updateTransaction";
     public static final String CHECK_CONNECTION_METHOD = "checkConnection";
     public static final String KEEP_SESSION_METHOD = "keepSession";
     private static final Class[] parameters = new Class[]{URL.class};
@@ -41,7 +46,7 @@ public class ClassLoaderUtil {
             Method method = sysclass.getDeclaredMethod("addURL", parameters);
             method.setAccessible(true);
             method.invoke(classLoader, new Object[]{new File(classPath).toURI().toURL()});
-            System.out.println("******* ClassLoaderUtil.addURL : " + classPath+ " SUCCESS");
+            System.out.println("******* ClassLoaderUtil.addURL : " + classPath + " SUCCESS");
         } catch (Throwable t) {
             t.printStackTrace();
             throw new IOException("Error, could not add URL to system classloader");
@@ -61,13 +66,14 @@ public class ClassLoaderUtil {
         try {
             return Class.forName(className, true, sysloader);
         } catch (Exception ex) {
+            logger.warn("Partner = " + partner.getPartnerId() + " - " + partner.getPartnerCode() + " : Khong load duoc " + className);
             ex.printStackTrace();
             addURL(sysloader, jarPath);
             try {
                 return Class.forName(className, true, sysloader);
             } catch (Exception ex1) {
                 ex1.printStackTrace();
-                throw new CardServiceException("Khong ton tai " + jarPath + " " + className);
+                throw new CardServiceException("Partner = " + partner.getPartnerId() + " - " + partner.getPartnerCode() + " : Khong ton tai " + jarPath + " " + className);
             }
         }
     }
@@ -81,7 +87,17 @@ public class ClassLoaderUtil {
             return (Transaction) method.invoke(loadedClass.newInstance(), transaction);
         }
     }
-    
+
+    public static Transaction updateTransaction(Partner partner, Map map) throws Exception {
+        Class loadedClass = loadClass(partner);
+        Method method = loadedClass.getDeclaredMethod(UPDATE_TRANSACITON_METHOD, Map.class);
+        if (Modifier.isStatic(method.getModifiers())) {
+            return (Transaction) method.invoke(loadedClass, map);
+        } else {
+            return (Transaction) method.invoke(loadedClass.newInstance(), map);
+        }
+    }
+
     public static String keepSession(Partner partner) throws Exception {
         Class loadedClass = loadClass(partner);
         Method method = loadedClass.getDeclaredMethod(KEEP_SESSION_METHOD);
@@ -91,7 +107,7 @@ public class ClassLoaderUtil {
             return (String) method.invoke(loadedClass.newInstance());
         }
     }
-    
+
     public static Boolean checkConnection(Partner partner) throws Exception {
         Class loadedClass = loadClass(partner);
         Method method = loadedClass.getDeclaredMethod(CHECK_CONNECTION_METHOD);
@@ -99,6 +115,16 @@ public class ClassLoaderUtil {
             return (Boolean) method.invoke(loadedClass);
         } else {
             return (Boolean) method.invoke(loadedClass.newInstance());
+        }
+    }
+
+    public static Transaction checkTransaction(Partner partner, Transaction transaction) throws Exception {
+        Class loadedClass = loadClass(partner);
+        Method method = loadedClass.getDeclaredMethod(CHECK_TRANSACTION_METHOD, Class.forName(Transaction.class.getName(), true, sysloader));
+        if (Modifier.isStatic(method.getModifiers())) {
+            return (Transaction) method.invoke(loadedClass, transaction);
+        } else {
+            return (Transaction) method.invoke(loadedClass.newInstance(), transaction);
         }
     }
 }

@@ -9,7 +9,6 @@ import com.vss.cardservice.dto.Issuer;
 import com.vss.cardservice.dto.Partner;
 import com.vss.cardservice.dto.PartnerInfo;
 import com.vss.cardservice.service.exception.InvalidSignatureException;
-import com.vss.message.util.LoggingUtil;
 
 /**
  *
@@ -19,31 +18,16 @@ public class PartnerServiceUtil {
 
     private static IPartnerService partnerService;
 
-    public static Partner getProcessPartner(int issuerId) {
-        return partnerService.getProcessPartner(issuerId);
+    public static Partner loadPartnerById(int partnerId) throws Exception {
+        return partnerService.loadPartnerById(partnerId);
     }
 
-    public static Partner validateSignature(PartnerInfo partnerInfo, String ip, String issuer, String cardCode, String transRef) throws InvalidSignatureException {
-        Partner validPartner = partnerService.checkPartnerRequest(partnerInfo.getPartnerCode(), partnerInfo.getPassword(), ip);
-        String secretKey = validPartner.getSecretKey();
-        String signature = partnerInfo.getSignature();
-        String validData;
-        if (cardCode == null) {
-            // signature for getTransactionDetail
-            validData = ServiceUtil.hashData(transRef + partnerInfo.getPartnerCode() + partnerInfo.getPassword() + secretKey);
-        } else {
-            // signature for useCard
-//            if (ServiceUtil.PPCARD_GATEWAY_IP.indexOf(ip) == -1) {
-            validData = ServiceUtil.hashData(issuer + cardCode + transRef + partnerInfo.getPartnerCode() + partnerInfo.getPassword() + secretKey);
-//            } else {
-//            validData = ServiceUtil.hashData(cardCode + transRef + partnerInfo.getPartnerCode() + partnerInfo.getPassword() + secretKey);
-//            }
-        }
-        if (!validData.equals(signature)) {
-            LoggingUtil.log("[ERROR][" + partnerInfo.getPartnerCode() + "] Sai chu ky : sys_sign=" + validData + ", partner_sign=" + signature, "useCard_transaction");
-            throw new InvalidSignatureException();
-        }
-        return validPartner;
+    public static Partner getProcessPartner(String issuerCode) {
+        return partnerService.getProcessPartner(issuerCode);
+    }
+
+    public static Partner validateInfo(PartnerInfo partnerInfo, String ip, String issuer, String cardCode, String transRef) throws InvalidSignatureException {
+        return partnerService.validateInfo(partnerInfo, ip, issuer, cardCode, transRef);
     }
 
     public static void checkLockIssuerPartner(Issuer issuer, Partner provider) {

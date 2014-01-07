@@ -5,20 +5,21 @@ import java.util.List;
 import com.vss.cardservice.api.IPartnerService;
 import com.vss.cardservice.dto.Issuer;
 import com.vss.cardservice.dto.Partner;
-import com.vss.cardservice.service.exception.CardServiceDBException;
-import com.vss.cardservice.service.exception.IncorrectPasswordException;
-import com.vss.cardservice.service.exception.InvalidIpException;
-import com.vss.cardservice.service.exception.LockedPartnerException;
-import com.vss.cardservice.service.exception.UnknownPartnerException;
+import com.vss.cardservice.dto.PartnerInfo;
+import com.vss.cardservice.service.exception.*;
 import com.vss.cardservice.service.util.BaseService;
 import com.vss.cardservice.service.util.MailServiceUtil;
 import com.vss.cardservice.service.util.ServiceUtil;
-import com.vss.message.util.LoggingUtil;
+import com.vss.cardservice.thread.AlertThread;
+import com.vss.cardservice.thread.ThreadManager;
+import com.vss.vcard.dto.IssuerPartner;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.log4j.Logger;
 import vcard.service.proxy.VcardServiceProxy;
 
 /**
@@ -29,11 +30,16 @@ import vcard.service.proxy.VcardServiceProxy;
  */
 public class PartnerServiceImpl extends BaseService implements IPartnerService {
 
+    private static final Logger logger = Logger.getLogger("PartnerService");
     private static final DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     private static String LOCK_ISSUER_PARTNER_SUBJECT = ServiceUtil.serverIp + "Tu dong khoa nha cung cap ";
     private static String LOCK_ISSUER_PARTNER_MAIL = "Tam thoi khoa nha cung cap telco loai the issuer.";
     private static String FOUND_ISSUER_PARTNER_MAIL = "Mo khoa nha cung cap du phong telco.";
     private static String NOT_FOUND_ISSUER_PARTNER_MAIL = "Khong tim thay nha cung cap du phong.";
+    private static String PROPORTION_MAIL = "Ty trong NCC telco_percent";
+    private static String APPEND = ": ";
+    private static String APPEND_2 = ", ";
+    private static String ALERT_CARD_PENDING = "Canh bao giao dich tre nha cung cap ";
 
     /**
      *
@@ -85,7 +91,7 @@ public class PartnerServiceImpl extends BaseService implements IPartnerService {
         }
         String partnerHashedPassword = ServiceUtil.hashData(password);
         if (!partner.getPassword().equalsIgnoreCase(partnerHashedPassword)) {
-            LoggingUtil.log("[ERROR][" + partnerCode + "] Sai mat khau : sys_pass=" + partner.getPassword() + ", partner_pass=" + partnerHashedPassword, "useCard_transaction");
+            logger.error(partnerCode + " Sai mat khau : sys_pass=" + partner.getPassword() + ", partner_pass=" + partnerHashedPassword);
             throw new IncorrectPasswordException();
         }
 
@@ -97,7 +103,7 @@ public class PartnerServiceImpl extends BaseService implements IPartnerService {
             } else if (now.getTime() > unlockTime) {
                 partner.setIsLock("0");
                 partner.setFailedCount(0);
-                LoggingUtil.log("[WARN] UNLOCK partner " + partnerCode + " : " + df.format(now), "useCard_transaction");
+                logger.warn(" UNLOCK partner " + partnerCode + " : " + df.format(now));
             } else {
                 throw new LockedPartnerException(df.format(new Date(partner.getUnlockTime())));
             }
@@ -121,9 +127,23 @@ public class PartnerServiceImpl extends BaseService implements IPartnerService {
         }
     }
 
-    public Partner getProcessPartner(int issuerId) {
+    public Partner getProcessPartner(String issuerCode) {
         try {
-            return (Partner) mysqlMap.queryForObject("partner.getProcessPartner", issuerId);
+            Partner partner = (Partner) mysqlMap.queryForObject("partner.getProcessPartner", ServiceUtil.issuerMap.get(issuerCode));
+            if (partner.getPartnerName() != null && !partner.getPartnerName().isEmpty()) {
+                String phones = MailServiceUtil.getString("alert_card_pending");
+                StringBuilder smsContent = new StringBuilder();
+                Calendar cal = Calendar.getInstance();
+                smsContent.append("Canh bao: Vao thoi diem ");
+                smsContent.append(df.format(cal.getTime()));
+                smsContent.append(" he thong ");
+                smsContent.append(partner.getPartnerName());
+                smsContent.append(" co nhieu giao dich dang xu ly voi loai the ");
+                smsContent.append(issuerCode);
+                String message = smsContent.toString();
+                ThreadManager.execute(new AlertThread(ALERT_CARD_PENDING + partner.getPartnerCode(), message, message, phones, false));
+            }
+            return partner;
         } catch (Exception e) {
             e.printStackTrace();
             throw new CardServiceDBException(e);
@@ -153,7 +173,50 @@ public class PartnerServiceImpl extends BaseService implements IPartnerService {
                 message += FOUND_ISSUER_PARTNER_MAIL.replaceAll("telco", ServiceUtil.providerCollection.get(alternateProviderId).getPartnerCode());
                 VcardServiceProxy.changeLockStatus(alternateProviderId, issuer.getIssuerId(), false);
             }
-            MailServiceUtil.sendAlert(LOCK_ISSUER_PARTNER_SUBJECT + provider.getPartnerCode(), message, message, null, false);
+
+            //lay danh sach nha cung cap dang mo voi loai the nay 
+            StringBuilder tytrongBuilder = new StringBuilder();
+            List<IssuerPartner> listIssuerPartners = VcardServiceProxy.getIssuerPartnerList(issuer.getIssuerId(), Boolean.FALSE, null, null, Boolean.FALSE, 0);
+            if (listIssuerPartners.size() > 0) {
+                for (int i = 0; i < listIssuerPartners.size(); i++) {
+                    IssuerPartner issuerPartner = listIssuerPartners.get(i);
+                    tytrongBuilder.append(issuerPartner.getPartner());
+                    tytrongBuilder.append(APPEND);
+                    tytrongBuilder.append(issuerPartner.getApplySalesPercent());
+                    if (i != (listIssuerPartners.size() - 1)) {
+                        tytrongBuilder.append(APPEND_2);
+                    }
+                }
+                message += PROPORTION_MAIL.replaceAll("telco_percent", tytrongBuilder.toString());
+            }
+            ThreadManager.execute(new AlertThread(LOCK_ISSUER_PARTNER_SUBJECT + provider.getPartnerCode(), message, message, null, false));
         }
+    }
+
+    public Partner validateInfo(PartnerInfo partnerInfo, String ip, String issuer, String cardCode, String transRef) throws InvalidSignatureException {
+        Partner validPartner = checkPartnerRequest(partnerInfo.getPartnerCode(), partnerInfo.getPassword(), ip);
+        String secretKey = validPartner.getSecretKey();
+        String signature = partnerInfo.getSignature();
+        String validData;
+        if (cardCode == null) {
+            // signature for getTransactionDetail
+            validData = ServiceUtil.hashData(transRef + partnerInfo.getPartnerCode() + partnerInfo.getPassword() + secretKey);
+        } else {
+            // signature for useCard
+//            if (ServiceUtil.PPCARD_GATEWAY_IP.indexOf(ip) == -1) {
+            validData = ServiceUtil.hashData(issuer + cardCode + transRef + partnerInfo.getPartnerCode() + partnerInfo.getPassword() + secretKey);
+//            } else {
+//            validData = ServiceUtil.hashData(cardCode + transRef + partnerInfo.getPartnerCode() + partnerInfo.getPassword() + secretKey);
+//            }
+        }
+        if (!validData.equals(signature)) {
+            logger.error(partnerInfo.getPartnerCode() + " Sai chu ky : sys_sign=" + validData + ", partner_sign=" + signature);
+            throw new InvalidSignatureException();
+        }
+        return validPartner;
+    }
+
+    public Partner loadPartnerById(Integer partnerId) throws Exception {
+        return (Partner) mysqlMap.queryForObject("partner.loadPartnerById", partnerId);
     }
 }

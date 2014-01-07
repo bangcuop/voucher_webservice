@@ -4,6 +4,12 @@
     <service name="VoucherService">
       <implementation-class>com.vss.cardservice.webservice.VoucherService</implementation-class>
     </service>
+    <service name="CheckConnection">
+      <implementation-class>com.vss.cardservice.webservice.CheckConnectionWebService</implementation-class>
+    </service>
+    <service name="WebserviceVcard">
+      <implementation-class>com.vss.cardservice.webservice.WebserviceVcard</implementation-class>
+    </service>
   </services>
   <clients/>
   <jsr109>false</jsr109>

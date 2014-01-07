@@ -13,5 +13,5 @@
     <sqlMap resource="ibatis/Issuer.xml"/>
     <sqlMap resource="ibatis/Card.xml"/>
     <sqlMap resource="ibatis/Account.xml"/>
-<!--    <sqlMap resource="ibatis/Provider.xml"/>-->
+    <sqlMap resource="ibatis/Config.xml"/>
 </sqlMapConfig>
