@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <endpoints version="2.0" xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime">
+  <endpoint implementation="com.vss.cardservice.webservice.WebserviceVcard" name="WebserviceVcard" url-pattern="/WebserviceVcard"/>
   <endpoint implementation="com.vss.cardservice.webservice.VoucherService" name="VoucherService" url-pattern="/VoucherService"/>
   <endpoint implementation="com.vss.cardservice.webservice.CheckConnectionWebService" name="CheckConnection" url-pattern="/CheckConnection"/>
-  <endpoint implementation="com.vss.cardservice.webservice.WebserviceVcard" name="WebserviceVcard" url-pattern="/WebserviceVcard"/>
   <endpoint implementation="com.vss.cardservice.webservice.CheckConnectionWebService" name="CheckConnection" url-pattern="/CheckConnection"/>
   <endpoint implementation="com.vss.cardservice.webservice.WebserviceVcard" name="WebserviceVcard" url-pattern="/WebserviceVcard"/>
 </endpoints>

@@ -16,7 +16,22 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet>
+        <servlet-name>WebserviceVcard</servlet-name>
+        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
         <servlet-name>VoucherService</servlet-name>
+        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckConnectionWebService</servlet-name>
+        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckConnection</servlet-name>
         <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -35,16 +50,20 @@
         <url-pattern>*.html</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>WebserviceVcard</servlet-name>
+        <url-pattern>/WebserviceVcard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>VoucherService</servlet-name>
         <url-pattern>/VoucherService</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CheckConnection</servlet-name>
+        <servlet-name>CheckConnectionWebService</servlet-name>
         <url-pattern>/CheckConnection</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>WebserviceVcard</servlet-name>
-        <url-pattern>/WebserviceVcard</url-pattern>
+        <servlet-name>CheckConnection</servlet-name>
+        <url-pattern>/CheckConnection</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
